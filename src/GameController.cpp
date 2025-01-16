@@ -48,7 +48,7 @@ void GameController::runLevel()
 void  GameController::loadSprites()
 {
 	
-	ResourcesManager& r = ResourcesManager::getInstance();
+	ResourcesManager& resources = ResourcesManager::getInstance();
 
 	m_sprite.clear();
 
@@ -57,7 +57,7 @@ void  GameController::loadSprites()
 	for (int pics = 0; pics < 8; ++pics)
 	{
 		sf::Sprite pic;
-		pic.setTexture(r.getTexture(OBJECT_NAME.at(pics)));
+		pic.setTexture(resources.getTexture(OBJECT_NAME.at(pics)));
 		m_sprite.push_back(pic);
 	}
 }
