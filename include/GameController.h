@@ -7,13 +7,15 @@
 #include "Consts.h"
 #include "Player.h"
 #include "Bombs.h"
-#include "Guards.h"
+#include "Guard.h"
 
 class GameController
 {
 public:
 	GameController();
+	void newGame();
+private:
+
 	//runLevel();
 	//
-private:
 };
