@@ -19,7 +19,7 @@ public:
 private:
 
 	void runLevel();
-	void loadSprites(sf::RenderWindow& window);
+	void loadSprites();
 	std::vector<sf::Sprite> m_sprite;
 	//
 };

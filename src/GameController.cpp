@@ -14,13 +14,8 @@ void GameController::newGame()
 void GameController::runLevel()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	/*ResourcesManager& r = ResourcesManager::instance();
-	r.loadTexture();*/
-	/*while(1)
-	{
-	window.display();
-	}*/
-	loadSprites(window);
+
+	loadSprites();
 	
 	int index = 0;
 	while (window.isOpen())
@@ -33,9 +28,7 @@ void GameController::runLevel()
 		window.clear();
 
 		// Draw the sprite
-		
-		m_sprite[6].setPosition(100, 100);
-		window.draw(m_sprite[6]);
+		window.draw(m_sprite[7]);
 		const float size = 50;
 		m_sprite[3].setPosition(100, 100);
 		m_sprite[3].setScale(size / m_sprite[3].getLocalBounds().width, size / m_sprite[3].getLocalBounds().height);
@@ -52,27 +45,19 @@ void GameController::runLevel()
 	}
 }
 
-void  GameController::loadSprites(sf::RenderWindow& window)
+void  GameController::loadSprites()
 {
-	sf::Sprite pic;
-	ResourcesManager& r = ResourcesManager::instance();
-	r.loadTexture();
-	std::vector<std::string> name = { "door", "guard" , "player" ,"rock" , "wall" , "empty" , "menu" ,"backround" };
+	
+	ResourcesManager& r = ResourcesManager::getInstance();
+
+	m_sprite.clear();
+
+	m_sprite.reserve(OBJECT_NAME.size());
+
 	for (int pics = 0; pics < 8; ++pics)
 	{
-		const sf::Texture* playerTexture = r.getTexture(name.at(pics));
-		if (playerTexture)
-		{
-			pic.setTexture(*playerTexture); // Dereference the pointer to get the texture
-		}
-		else
-		{
-			return; // Exit if the texture is not found
-		}
+		sf::Sprite pic;
+		pic.setTexture(r.getTexture(OBJECT_NAME.at(pics)));
 		m_sprite.push_back(pic);
 	}
-	window.draw(m_sprite[6]);
-	window.display();
-	while(1)
-	{ }
 }

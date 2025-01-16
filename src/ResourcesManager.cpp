@@ -3,13 +3,13 @@
 
 ResourcesManager::ResourcesManager()
 { 
-	//loadTexture(); 
+	loadTexture(); 
 }
 ResourcesManager::~ResourcesManager() 
 { 
 	//cout << "d-tor" << endl; 
 }
-ResourcesManager& ResourcesManager::instance() 
+ResourcesManager& ResourcesManager::getInstance() 
 {
 	static ResourcesManager inst;
 	return inst;
@@ -36,9 +36,7 @@ void ResourcesManager::loadTexture()
         sf::Texture texture;
         if (!texture.loadFromFile(filePath)) 
         {
-            std::cout << "why" << std::endl;
-            // Handle error, return false if the texture fails to load
-            //return false;
+            std::cout << "Failed to load texture " << filePath <<std::endl;
         }
         
         // Insert the texture into the unordered_map
@@ -46,12 +44,12 @@ void ResourcesManager::loadTexture()
 
     }
 }
-const sf::Texture* ResourcesManager::getTexture(std::string name)
+const sf::Texture& ResourcesManager::getTexture(std::string name)
 {
     auto it = m_textures.find(name);
-    if (it != m_textures.end()) 
+    if (it == m_textures.end())
     {
-        return &(it->second); // Return a pointer to the texture
+            std::cout << "Could not find texture: " << name << std::endl;
     }
-    return nullptr; // Return nullptr if the texture is not found
+    return it->second;
 }

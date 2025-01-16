@@ -8,14 +8,14 @@ class ResourcesManager
 {
 public:
 	~ResourcesManager();
-	static ResourcesManager& instance();
-    const sf::Texture* getTexture(std::string name);
+	static ResourcesManager& getInstance();
+	const sf::Texture& getTexture(std::string name);
 	void loadTexture();
 	void show() const;
 private:
 	ResourcesManager();
-	ResourcesManager(const ResourcesManager&) = default;
-	ResourcesManager& operator=(const ResourcesManager&) = default;
+	ResourcesManager(const ResourcesManager&) = delete;
+	ResourcesManager& operator=(const ResourcesManager&) = delete;
 	//void loadTexture();
 	std::unordered_map<std::string, sf::Texture> m_textures;
 };
