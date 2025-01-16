@@ -6,7 +6,7 @@ GameObject::GameObject(sf::Sprite base_pic) :
 {
 }
 
-GameObject::setSprite()
-{
-	m_
-}
+//GameObject::setSprite()
+//{
+//	m_
+//}

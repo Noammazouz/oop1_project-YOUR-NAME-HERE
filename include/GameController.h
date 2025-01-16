@@ -4,10 +4,12 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Board.h"
-#include "Consts.h"
 #include "Player.h"
 #include "Bombs.h"
 #include "Guard.h"
+#include "ResourcesManager.h"
+#include "Const.h"
+
 
 class GameController
 {
@@ -16,6 +18,8 @@ public:
 	void newGame();
 private:
 
-	//runLevel();
+	void runLevel();
+	void loadSprites(sf::RenderWindow& window);
+	std::vector<sf::Sprite> m_sprite;
 	//
 };
