@@ -37,7 +37,7 @@ void GameController::runLevel()
 		window.display();
 		
 
-		for (auto event = sf::Event{}; window.pollEvent(event); )
+		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
