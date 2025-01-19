@@ -1,12 +1,7 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(sf::Sprite base_pic) :
-	m_pic(base_pic)
+void GameObject::draw(sf::RenderWindow& window)
 {
+	window.draw(m_pic);
 }
-
-//GameObject::setSprite()
-//{
-//	m_
-//}

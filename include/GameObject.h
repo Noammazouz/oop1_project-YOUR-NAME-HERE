@@ -5,9 +5,8 @@
 class GameObject
 {
 public:
-	GameObject(sf::Sprite base_pic);
-	//virtual setSprite();
-	//virtual sf::RectangleShape makeRectangle() const = 0;
-private:
-	sf::Sprite m_pic;
+	virtual ~GameObject() = default;
+	virtual void draw(sf::RenderWindow& window);
+	virtual sf::Vector2f getPosition() const = 0;
+	virtual void setSprite(const sf::Sprite& sprite) = 0;
 };
