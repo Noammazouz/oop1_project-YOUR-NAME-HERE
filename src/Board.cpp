@@ -60,41 +60,22 @@ void Board::LoadBoard(sf::RenderWindow& window, std::vector<std::unique_ptr<Upda
 			case '#': // Wall
 				pic.setTexture(resources.getTexture("wall"));
 				m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("wall")));
+				std::cout << "in wall case: " << index << std::endl;
+				++index;
 				break;
 			case '@': // Rock
 				pic.setTexture(resources.getTexture("rock"));
 				m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("rock")));
+				std::cout << "in rock case" << std::endl;
 				break;
 			case '!': // Guard
 				pic.setTexture(resources.getTexture("guard"));
 				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
 				break;
 			}
-			//switch (m_level[row][col])
-			//{
-			//case 'D': // Door
-			//	m_staticObj[index].;
-			//	/*pic.setTexture(resources.getTexture("door"));
-			//	pic.setPosition(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE));*/
-			//	break;
-			//case '/': // Player
-			//	pic.setTexture(resources.getTexture("player"));
-			//	m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
-			//	break;
-			//case '#': // Wall
-			//	pic.setTexture(resources.getTexture("wall"));
-			//	m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
-			//	break;
-			//case '@': // Rock
-			//	pic.setTexture(resources.getTexture("rock"));
-			//	m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
-			//	break;
-			//case '!': // Guard
-			//	pic.setTexture(resources.getTexture("guard"));
-			//	m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
-			//	break;
-			//}
+			std::cout << "locition: " << row << " " << col << std::endl;
 			window.draw(pic);
 		}
 	}
+	std::cout << "num of rows: " << m_rows << " num of cols: " << m_cols << std::endl;
 }

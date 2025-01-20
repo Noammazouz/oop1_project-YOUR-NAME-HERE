@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include <iostream>
 
 GameObject::GameObject()
 	: m_position(0,0)
@@ -7,6 +8,7 @@ GameObject::GameObject()
 GameObject::GameObject(const sf::Texture texture, sf::Vector2f pos)
 	: m_position(pos)
 {
+	//std::cout << m_position.x / 32 << " " << m_position.y / 32 << std::endl;
 	setTexture(texture);
 }
 void GameObject::draw(sf::RenderWindow& window)
