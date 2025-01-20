@@ -15,7 +15,7 @@ void GameController::runLevel()
 {
 	m_board.loadLevel();
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	m_board.LoadBoard(window, m_movingObj, m_staticObj);
+	m_board.LoadBoard(m_movingObj, m_staticObj);
 	
 	while (window.isOpen())
 	{
@@ -24,7 +24,7 @@ void GameController::runLevel()
 
 		// Draw the sprite
 		
-		//drawWindow(window);
+		drawWindow(window);
 		// Display everything
 		window.display();
 		
@@ -42,6 +42,18 @@ void  GameController::drawWindow(sf::RenderWindow& window)
 	
 	ResourcesManager& resources = ResourcesManager::getInstance();
 	sf::Sprite backround;
+
 	backround.setTexture(resources.getTexture("backround"));
 	window.draw(backround);
+
+	for (const auto& staticObj : m_staticObj)
+	{
+		staticObj->draw(window);
+	}
+
+	// Draw moving objects
+	for (const auto& movingObj : m_movingObj)
+	{
+		movingObj->draw(window);
+	}
 }

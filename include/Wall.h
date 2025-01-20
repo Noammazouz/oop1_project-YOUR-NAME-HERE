@@ -4,7 +4,7 @@
 class Wall : public StaticObject
 {
 public:
-	Wall(sf::Vector2f position, const sf::Texture texture);
+	Wall(sf::Vector2f position, const sf::Texture& texture);
 
 	~Wall() = default;
 private:

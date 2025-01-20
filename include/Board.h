@@ -11,13 +11,11 @@ class Board
 {
 public:
 	Board();
-	void LoadBoard(sf::RenderWindow& window, std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
+	void LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
 		, std::vector<std::unique_ptr<StaticObject>>& m_staticObj);
 	void loadLevel();
 
-
 private:
-	//std::vector<std::vector<Tile>> m_board;
 	std::vector<std::string> m_level;
 	int m_rows;
 	int m_cols;

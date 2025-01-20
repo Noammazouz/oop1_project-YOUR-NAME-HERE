@@ -4,7 +4,7 @@
 class Rock : public StaticObject
 {
 public:
-	Rock(sf::Vector2f position, const sf::Texture texture);
+	Rock(sf::Vector2f position, const sf::Texture& texture);
 
 	~Rock() = default;
 private:
