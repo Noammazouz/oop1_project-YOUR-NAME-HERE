@@ -1,16 +1,27 @@
+#include "Board.h"
+#include "ResourcesManager.h"
+#include <fstream>
+#include "Guard.h"
+#include "Player.h"
+#include "Rock.h"
+#include "Wall.h"
+#include "Door.h"
+
+Board::Board()
+{}
 
 //-----------------------
 void Board::loadLevel()
 {
-	m_board.clear();
+	m_level.clear();
 	auto line = std::string();
-	std::string currFileName = std::string("Level") + std::to_string(currStage) + ".txt";
+	std::string currFileName = std::string("Level") + std::to_string(1) + ".txt";
 	std::ifstream file(currFileName);
 
 	if (!file)
 	{
 		std::cout << "You are the best! You beat me!" << std::endl;
-		return END_GAME;
+		//return END_GAME;
 	}
 
 	while (std::getline(file, line))
@@ -18,48 +29,72 @@ void Board::loadLevel()
 		m_level.push_back(line);
 	}
 
-	sizeRow = static_cast<int>(m_board.size()) - 1;
-	sizeCol = static_cast<int>(m_board[sizeRow].size()) - 1;
+	m_rows = static_cast<int>(m_level.size()) - 1;
+	m_cols = static_cast<int>(m_level[m_rows].size()) - 1;
 
-	return currStage;
+	//return currStage;
 }
 //-------------------------
-void Board::LoadBoard(const std::vector <sf::Sprite>& textures, int index[])
+void Board::LoadBoard(sf::RenderWindow& window, std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
+						, std::vector<std::unique_ptr<StaticObject>>& m_staticObj)
 {
-	const float TILE_SIZE_X = float((WIDTH - BOARD_STARTING_X - WIDTH / 20) / m_cols);
-	const float TILE_SIZE_Y = float((HEIGHT - BOARD_STARTING_Y - HEIGHT / 20) / m_rows);
-
-	m_board.clear();
-	m_board.reserve(m_rows);
-
+	sf::Sprite pic;
+	ResourcesManager& resources = ResourcesManager::getInstance();
+	int index = 0;
 	for (int row = 0; row < m_rows; row++)
 	{
-		m_board.emplace_back(m_cols);
 		for (int col = 0; col < m_cols; col++)
 		{
-			m_board[row][col].setLocation(col, row, TILE_SIZE_X, TILE_SIZE_Y);
-
-			if (m_isBoardExist)
+			
+			switch (m_level[row][col])
 			{
-				switch (m_level[row][col])
-				{
-				case 'D':
-					m_board[row][col].setTexture(&textures[index[DOOR]]);
-					break;
-				case '/':
-					m_board[row][col].setTexture(&textures[index[PLAYER]]);
-					break;
-				case '#':
-					m_board[row][col].setTexture(&textures[index[WALL]]);
-					break;
-				case '@':
-					m_board[row][col].setTexture(&textures[index[ROCK]]);
-					break;
-				case '!':
-					m_board[row][col].setTexture(&textures[index[GUARD]]);
-					break;
-				}
+			case 'D': // Door
+				m_staticObj.push_back(std::make_unique<Door>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				/*pic.setTexture(resources.getTexture("door"));
+				pic.setPosition(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE));*/
+				break;
+			case '/': // Player
+				pic.setTexture(resources.getTexture("player"));
+				m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				break;
+			case '#': // Wall
+				pic.setTexture(resources.getTexture("wall"));
+				m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("wall")));
+				break;
+			case '@': // Rock
+				pic.setTexture(resources.getTexture("rock"));
+				m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("rock")));
+				break;
+			case '!': // Guard
+				pic.setTexture(resources.getTexture("guard"));
+				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				break;
 			}
+			//switch (m_level[row][col])
+			//{
+			//case 'D': // Door
+			//	m_staticObj[index].;
+			//	/*pic.setTexture(resources.getTexture("door"));
+			//	pic.setPosition(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE));*/
+			//	break;
+			//case '/': // Player
+			//	pic.setTexture(resources.getTexture("player"));
+			//	m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+			//	break;
+			//case '#': // Wall
+			//	pic.setTexture(resources.getTexture("wall"));
+			//	m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+			//	break;
+			//case '@': // Rock
+			//	pic.setTexture(resources.getTexture("rock"));
+			//	m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+			//	break;
+			//case '!': // Guard
+			//	pic.setTexture(resources.getTexture("guard"));
+			//	m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+			//	break;
+			//}
+			window.draw(pic);
 		}
 	}
 }

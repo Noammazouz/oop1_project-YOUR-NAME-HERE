@@ -3,20 +3,22 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include "Const.h"
+#include "UpdateableObject.h"
+#include "StaticObject.h"
 
 class Board
 {
 public:
 	Board();
-	void LoadBoard(const std::vector <sf::Texture>& textures, int index[]);
+	void LoadBoard(sf::RenderWindow& window, std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
+		, std::vector<std::unique_ptr<StaticObject>>& m_staticObj);
 	void loadLevel();
 
 
 private:
-	std::vector<std::vector<Tile>> m_board;
+	//std::vector<std::vector<Tile>> m_board;
 	std::vector<std::string> m_level;
-	bool m_isBoardExist = false;
 	int m_rows;
 	int m_cols;
 };

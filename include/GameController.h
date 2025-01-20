@@ -9,6 +9,9 @@
 #include "Guard.h"
 #include "ResourcesManager.h"
 #include "Const.h"
+#include "UpdateableObject.h"
+#include "StaticObject.h"
+#include "GameObject.h"
 
 
 class GameController
@@ -19,7 +22,8 @@ public:
 private:
 
 	void runLevel();
-	void loadSprites();
-	std::vector<sf::Sprite> m_sprite;
-	//
+	void drawWindow(sf::RenderWindow& window);
+	Board m_board;
+	std::vector<std::unique_ptr<UpdateableObject>> m_movingObj;
+	std::vector<std::unique_ptr<StaticObject>> m_staticObj;
 };

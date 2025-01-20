@@ -13,26 +13,18 @@ void GameController::newGame()
 //---------
 void GameController::runLevel()
 {
+	m_board.loadLevel();
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-
-	loadSprites();
+	m_board.LoadBoard(window, m_movingObj, m_staticObj);
 	
-	int index = 0;
 	while (window.isOpen())
 	{
-		if (index == 8)
-		{
-			index = 0;
-		}
 		// Clear the window
 		window.clear();
 
 		// Draw the sprite
-		window.draw(m_sprite[7]);
-		const float size = 50;
-		m_sprite[3].setPosition(100, 100);
-		m_sprite[3].setScale(size / m_sprite[3].getLocalBounds().width, size / m_sprite[3].getLocalBounds().height);
-		window.draw(m_sprite[3]);
+		
+		//drawWindow(window);
 		// Display everything
 		window.display();
 		
@@ -45,19 +37,11 @@ void GameController::runLevel()
 	}
 }
 
-void  GameController::loadSprites()
+void  GameController::drawWindow(sf::RenderWindow& window)
 {
 	
 	ResourcesManager& resources = ResourcesManager::getInstance();
-
-	m_sprite.clear();
-
-	m_sprite.reserve(OBJECT_NAME.size());
-
-	for (int pics = 0; pics < 8; ++pics)
-	{
-		sf::Sprite pic;
-		pic.setTexture(resources.getTexture(OBJECT_NAME.at(pics)));
-		m_sprite.push_back(pic);
-	}
+	sf::Sprite backround;
+	backround.setTexture(resources.getTexture("backround"));
+	window.draw(backround);
 }
