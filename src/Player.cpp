@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(sf::Vector2f position)
+Player::Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
+	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
 }
 void Player::update()

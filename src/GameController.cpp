@@ -39,7 +39,6 @@ void GameController::runLevel()
 
 void  GameController::drawWindow(sf::RenderWindow& window)
 {
-	
 	ResourcesManager& resources = ResourcesManager::getInstance();
 	sf::Sprite backround;
 

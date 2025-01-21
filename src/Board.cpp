@@ -7,6 +7,10 @@
 #include "Wall.h"
 #include "Door.h"
 
+//// Define the variables here
+//float CELL_WIDTH = 0;
+//float CELL_HEIGHT = 0;
+
 Board::Board()
 {}
 
@@ -38,6 +42,11 @@ void Board::loadLevel()
 void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
 						, std::vector<std::unique_ptr<StaticObject>>& m_staticObj)
 {
+	float frameWidth = WIDTH * 0.8f; 
+	float frameHeight = HEIGHT * 0.8f * 1.2;
+	const float CELL_WIDTH = frameWidth / m_cols;
+	const float CELL_HEIGHT = frameHeight / m_rows;
+
 	sf::Sprite pic;
 	ResourcesManager& resources = ResourcesManager::getInstance();
 
@@ -48,19 +57,19 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 			switch (m_level[row][col])
 			{
 			case 'D': // Door
-				m_staticObj.push_back(std::make_unique<Door>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				m_staticObj.push_back(std::make_unique<Door>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("door"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '/': // Player
-				m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '#': // Wall
-				m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("wall")));
+				m_staticObj.push_back(std::make_unique<Wall>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("wall"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '@': // Rock
-				m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE), resources.getTexture("rock")));
+				m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("rock"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '!': // Guard
-				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(col * TILE_SIZE, row * TILE_SIZE)));
+				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("guard"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			}
 		}
