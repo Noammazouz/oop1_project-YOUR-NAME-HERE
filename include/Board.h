@@ -6,12 +6,15 @@
 #include "UpdateableObject.h"
 #include "StaticObject.h"
 
+class Player;
+
+
 class Board
 {
 public:
 	Board();
 	void LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
-		, std::vector<std::unique_ptr<StaticObject>>& m_staticObj);
+		, std::vector<std::unique_ptr<StaticObject>>& m_staticObj, Player& m_player);
 	void loadLevel();
 
 private:

@@ -29,7 +29,12 @@ sf::Vector2f GameObject::getPosition() const
 	return m_position;
 }
 
-void GameObject::setPosition(const sf::Vector2f position)
+void GameObject::move(sf::Vector2f direction)
 {
-	m_position = position;
+	m_position += direction;
+	m_pic.move(direction);
 }
+//void GameObject::setPosition(const sf::Vector2f position)
+//{
+//	m_position = position;
+//}

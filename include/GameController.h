@@ -23,10 +23,12 @@ private:
 
 	void runLevel();
 	void drawWindow(sf::RenderWindow& window);
-	void move();
+	void move(sf::Clock& clock);
 
 
 	Board m_board;
+	Player m_player;
+	//sf::Clock m_clock;
 	std::vector<std::unique_ptr<UpdateableObject>> m_movingObj;
 	std::vector<std::unique_ptr<StaticObject>> m_staticObj;
 };

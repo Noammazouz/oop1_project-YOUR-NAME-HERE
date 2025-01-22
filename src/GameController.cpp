@@ -15,7 +15,8 @@ void GameController::runLevel()
 {
 	m_board.loadLevel();
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	m_board.LoadBoard(m_movingObj, m_staticObj);
+	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+	sf::Clock clock;
 	
 	while (window.isOpen())
 	{
@@ -31,6 +32,7 @@ void GameController::runLevel()
 
 		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
+			m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
 			switch (event.type)
 			{
 				case sf::Event::Closed:
@@ -44,17 +46,14 @@ void GameController::runLevel()
 					}
 					else
 					{
-						for (auto& movingObj : m_movingObj)
-						{
-							//movingObj->setDirection(event.key.code);
-						}
+						m_player.setDirectionFromKeyboard(event.key.code);
 					}
 					break;
 				}
 			}
 		}
 
-		move();
+		move(clock);
 	}
 }
 
@@ -76,14 +75,17 @@ void  GameController::drawWindow(sf::RenderWindow& window)
 	{
 		movingObj->draw(window);
 	}
+
+	m_player.draw(window);
 }
-void GameController::move()
+void GameController::move(sf::Clock& clock)
 {
-	sf::Clock clock;
 	const auto deltaTime = clock.restart();
 
+	m_player.update(deltaTime);
 	for (auto& movingObj : m_movingObj)
 	{
-		//movingObj->move();
+		//movingObj->setDirection(m_player.getPosition());
+		movingObj->update(deltaTime);
 	}
 }

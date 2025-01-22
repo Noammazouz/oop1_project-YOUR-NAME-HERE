@@ -37,7 +37,7 @@ void Board::loadLevel()
 }
 //-------------------------
 void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
-						, std::vector<std::unique_ptr<StaticObject>>& m_staticObj)
+						, std::vector<std::unique_ptr<StaticObject>>& m_staticObj, Player& m_player)
 {
 	float frameWidth = WIDTH * 0.8f; 
 	float frameHeight = HEIGHT * 0.8f * 1.2;
@@ -46,8 +46,6 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 
 	sf::Sprite pic;
 	ResourcesManager& resources = ResourcesManager::getInstance();
-
-	std::unique_ptr<Player> player = nullptr;
 
 	for (int row = 0; row < m_rows; row++)
 	{
@@ -59,8 +57,7 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 				m_staticObj.push_back(std::make_unique<Door>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("door"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '/': // Player
-				//m_movingObj.push_back(std::make_unique<Player>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT));
-				player = std::make_unique<Player>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT);
+                 m_player = Player(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT);
 				
 				break;
 			case '#': // Wall
@@ -75,5 +72,4 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 			}
 		}
 	}
-	m_movingObj.insert(m_movingObj.begin(), std::move(player));
 }

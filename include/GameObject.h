@@ -11,7 +11,9 @@ public:
 
 	virtual void draw(sf::RenderWindow& window);
 	virtual sf::Vector2f getPosition() const;
-	virtual void setPosition(const sf::Vector2f position);
+	//virtual void setPosition(const sf::Vector2f position);
+protected:
+	void move(sf::Vector2f direction);
 
 private:
 	void setTexture(const sf::Texture& texture);

@@ -1,10 +1,16 @@
 #include "Player.h"
+#include <iostream>
+
+
+Player::Player()
+{
+}
 
 Player::Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
 }
-void Player::setDirection(sf::Keyboard::Key key)
+void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
@@ -26,24 +32,8 @@ void Player::setDirection(sf::Keyboard::Key key)
 	}
 }
 
-void Player::update(sf::Keyboard::Key key, sf::Vector2f position)
+void Player::update(sf::Time deltaTime)
 {
-	/*switch (key)
-	{
-	case sf::Keyboard::Key::Space:
-		m_direction = sf::Vector2f(0, 0);
-		break;
-	case sf::Keyboard::Key::Left:
-		m_direction = sf::Vector2f(-1, 0);
-		break;
-	case sf::Keyboard::Key::Down:
-		m_direction = sf::Vector2f(0, 1);
-		break;
-	case sf::Keyboard::Key::Right:
-		m_direction = sf::Vector2f(1, 0);
-		break;
-	case sf::Keyboard::Key::Up:
-		m_direction = sf::Vector2f(0, -1);
-		break;
-	}*/
+	//std::cout << (m_direction * SPEED * deltaTime.asSeconds()).x << " " << (m_direction * SPEED * deltaTime.asSeconds()).y << std::endl;
+	this->move(m_direction * SPEED * deltaTime.asSeconds());
 }
