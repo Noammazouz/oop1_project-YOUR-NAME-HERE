@@ -20,19 +20,15 @@ void GameController::runLevel()
 	
 	while (window.isOpen())
 	{
-		// Clear the window
 		window.clear();
 
-		// Draw the sprite
-		
 		drawWindow(window);
-		// Display everything
+
 		window.display();
 		
 
 		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
-			m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
 			switch (event.type)
 			{
 				case sf::Event::Closed:
@@ -48,6 +44,11 @@ void GameController::runLevel()
 					{
 						m_player.setDirectionFromKeyboard(event.key.code);
 					}
+					break;
+				}
+				case sf::Event::KeyReleased:
+				{
+					m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
 					break;
 				}
 			}
@@ -85,7 +86,7 @@ void GameController::move(sf::Clock& clock)
 	m_player.update(deltaTime);
 	for (auto& movingObj : m_movingObj)
 	{
-		//movingObj->setDirection(m_player.getPosition());
+		movingObj->setDirection(m_player.getPosition());
 		movingObj->update(deltaTime);
 	}
 }

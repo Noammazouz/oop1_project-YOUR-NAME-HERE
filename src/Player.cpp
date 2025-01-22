@@ -34,6 +34,8 @@ void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 
 void Player::update(sf::Time deltaTime)
 {
-	//std::cout << (m_direction * SPEED * deltaTime.asSeconds()).x << " " << (m_direction * SPEED * deltaTime.asSeconds()).y << std::endl;
 	this->move(m_direction * SPEED * deltaTime.asSeconds());
 }
+
+void Player::setDirection(sf::Vector2f position)
+{}
