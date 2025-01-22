@@ -23,6 +23,9 @@ private:
 
 	void runLevel();
 	void drawWindow(sf::RenderWindow& window);
+	void move();
+
+
 	Board m_board;
 	std::vector<std::unique_ptr<UpdateableObject>> m_movingObj;
 	std::vector<std::unique_ptr<StaticObject>> m_staticObj;

@@ -31,9 +31,30 @@ void GameController::runLevel()
 
 		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			switch (event.type)
+			{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::KeyPressed:
+				{
+					if (event.key.code == sf::Keyboard::Escape)
+					{
+						window.close();
+					}
+					else
+					{
+						for (auto& movingObj : m_movingObj)
+						{
+							//movingObj->setDirection(event.key.code);
+						}
+					}
+					break;
+				}
+			}
 		}
+
+		move();
 	}
 }
 
@@ -54,5 +75,15 @@ void  GameController::drawWindow(sf::RenderWindow& window)
 	for (const auto& movingObj : m_movingObj)
 	{
 		movingObj->draw(window);
+	}
+}
+void GameController::move()
+{
+	sf::Clock clock;
+	const auto deltaTime = clock.restart();
+
+	for (auto& movingObj : m_movingObj)
+	{
+		//movingObj->move();
 	}
 }
