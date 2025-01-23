@@ -7,6 +7,7 @@ class GameObject
 public:
 	GameObject();
 	GameObject(const sf::Texture& texture, sf::Vector2f pos, float CELL_WIDTH, float CELL_HEIGHT);
+	GameObject(const sf::Texture& texture, sf::Vector2f pos);
 	virtual ~GameObject() = default;
 
 	virtual void draw(sf::RenderWindow& window);
@@ -17,7 +18,8 @@ protected:
 
 private:
 	void setTexture(const sf::Texture& texture);
-	int m_limits[2];
+	void setSprite();
+	float m_cell_size[2];
 	sf::Sprite m_pic;
 	sf::Vector2f m_position;
 };
