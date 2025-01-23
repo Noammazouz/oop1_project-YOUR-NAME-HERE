@@ -30,7 +30,7 @@ void GameObject::setTexture(const sf::Texture& texture)
 
 sf::Vector2f GameObject::getPosition() const
 {
-	return m_pic.getPosition(); //m_position;
+	return m_pic.getPosition();
 }
 
 void GameObject::move(sf::Vector2f direction)

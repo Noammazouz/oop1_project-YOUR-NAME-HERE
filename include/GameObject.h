@@ -12,7 +12,7 @@ public:
 
 	virtual void draw(sf::RenderWindow& window);
 	virtual sf::Vector2f getPosition() const;
-	sf::Vector2f getStartingPosition() const;
+	//sf::Vector2f getStartingPosition() const;
 
 
 protected:
@@ -23,6 +23,4 @@ private:
 	void setSprite(sf::Vector2f pos);
 	float m_cell_size[2];
 	sf::Sprite m_pic;
-	sf::Vector2f m_starting_position;
-	//sf::Vector2f m_position;
 };
