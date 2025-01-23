@@ -9,6 +9,9 @@ public:
 	void update(sf::Time deltaTime) override;
 	void setDirectionFromKeyboard(sf::Keyboard::Key key);
 	void setDirection(sf::Vector2f position) override;
+	/*bool checkCollision(GameObjects& otherObject);
+	* 
+	*/
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;
