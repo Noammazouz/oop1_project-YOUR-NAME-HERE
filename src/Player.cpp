@@ -34,8 +34,14 @@ void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 
 void Player::update(sf::Time deltaTime)
 {
-	this->move(m_direction * SPEED * deltaTime.asSeconds());
+	m_prevlocation = this->getPosition();
+	this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
 }
 
 void Player::setDirection(sf::Vector2f position)
 {}
+
+void Player::staticCollide(GameObject& otherObject)
+{
+	otherObject.playerCollide(*this);
+}

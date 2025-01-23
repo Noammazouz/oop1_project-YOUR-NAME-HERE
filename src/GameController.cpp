@@ -53,8 +53,9 @@ void GameController::runLevel()
 				}
 			}
 		}
-
+		
 		move(clock);
+		handleCollision();
 	}
 }
 
@@ -89,4 +90,22 @@ void GameController::move(sf::Clock& clock)
 		movingObj->setDirection(m_player.getPosition());
 		movingObj->update(deltaTime);
 	}
+}
+
+void GameController::handleCollision()
+{
+	for (const auto& staticObj : m_staticObj)
+	{
+		if (m_player.checkCollision(*staticObj))
+		{
+			m_player.staticCollide(*staticObj);
+		}
+	}
+	//for (auto& movingObj : m_movingObj)
+	//{
+	//	if (m_player.checkCollision(*movingObj))
+	//	{
+	//		m_player.updateableCollide(*movingObj);
+	//	}
+	//}
 }

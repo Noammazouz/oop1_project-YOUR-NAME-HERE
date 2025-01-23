@@ -24,6 +24,7 @@ private:
 	void runLevel();
 	void drawWindow(sf::RenderWindow& window);
 	void move(sf::Clock& clock);
+	void handleCollision();
 
 	Board m_board;
 	Player m_player;

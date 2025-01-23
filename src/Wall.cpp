@@ -4,3 +4,8 @@ Wall::Wall(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, 
 	: StaticObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
 }
+
+ReturnType Wall::playerCollide(Player& player)
+{
+	return WALL;
+}

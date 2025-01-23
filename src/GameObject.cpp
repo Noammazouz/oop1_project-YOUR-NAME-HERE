@@ -39,3 +39,26 @@ void GameObject::setSprite(sf::Vector2f pos)
 	m_pic.setOrigin(static_cast<float>(m_pic.getTexture()->getSize().x) / 2.0f, static_cast<float>(m_pic.getTexture()->getSize().y) / 2.0f);
 	m_pic.setPosition(pos);
 }
+
+void GameObject::updatePosition(sf::Vector2f direction)
+{
+	float left_corner = direction.x + m_pic.getPosition().x - m_cell_size[0];
+	float bottom_corner = direction.y + m_pic.getPosition().y + m_cell_size[1];
+	float up_corner = direction.y + m_pic.getPosition().y - m_cell_size[1];
+	float right_corner = direction.x + m_pic.getPosition().x + m_cell_size[0];
+
+	if (left_corner > BOARD_STARTING_X && up_corner > 0 && bottom_corner < HEIGHT && right_corner < WIDTH)
+	{
+		m_pic.move(direction);
+	}
+}
+
+sf::FloatRect GameObject::getBounds() const
+{
+	return m_pic.getGlobalBounds();
+}
+
+void GameObject::setPosition(const sf::Vector2f& position)
+{
+	m_pic.setPosition(position);
+}

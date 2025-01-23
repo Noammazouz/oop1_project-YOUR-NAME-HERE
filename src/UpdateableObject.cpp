@@ -17,15 +17,11 @@ sf::Vector2f UpdateableObject::getStartingPosition(sf::Vector2f position) const
 	return m_starting_position;
 }
 
-void UpdateableObject::move(sf::Vector2f direction)
+bool UpdateableObject::checkCollision(GameObject & otherObject)
 {
-	float left_corner = direction.x + m_pic.getPosition().x - m_cell_size[0];
-	float bottom_corner = direction.y + m_pic.getPosition().y + m_cell_size[1];
-	float up_corner = direction.y + m_pic.getPosition().y - m_cell_size[1];
-	float right_corner = direction.x + m_pic.getPosition().x + m_cell_size[0];
-
-	if (left_corner > BOARD_STARTING_X && up_corner > 0 && bottom_corner < HEIGHT && right_corner < WIDTH)
+	if (getBounds().intersects(otherObject.getBounds()))
 	{
-		m_pic.move(direction);
+		return true;
 	}
+	return false;
 }

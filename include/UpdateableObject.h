@@ -13,7 +13,7 @@ public:
 	virtual void update(sf::Time deltaTime) = 0;
 	virtual void setDirection(sf::Vector2f position) = 0;
 	virtual ~UpdateableObject() = default;
-	void move(sf::Vector2f direction);
+	virtual bool checkCollision(GameObject& otherObject);
 private:
 	sf::Vector2f m_starting_position;
 };
