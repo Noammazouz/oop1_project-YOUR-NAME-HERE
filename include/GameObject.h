@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include "Const.h"
+
+
+
 class GameObject
 {
 public:
@@ -12,15 +15,18 @@ public:
 
 	virtual void draw(sf::RenderWindow& window);
 	virtual sf::Vector2f getPosition() const;
-	//sf::Vector2f getStartingPosition() const;
+	/*virtual void collide(GameObject& otherObject) = 0;
+	virtual void collide(Door& otherObject) = 0;
+	virtual void collide(Guard& otherObject) = 0;
+	virtual void collide(Bombs& otherobject) = 0;
+	virtual void collide*/
 
 
 protected:
-	void move(sf::Vector2f direction);
+	sf::Sprite m_pic;
+	float m_cell_size[2];
 
 private:
 	void setTexture(const sf::Texture& texture);
 	void setSprite(sf::Vector2f pos);
-	float m_cell_size[2];
-	sf::Sprite m_pic;
 };

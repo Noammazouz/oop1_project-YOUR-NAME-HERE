@@ -12,4 +12,6 @@ public:
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;
+	int m_lives = 3;
+	int m_score = 0;
 };
