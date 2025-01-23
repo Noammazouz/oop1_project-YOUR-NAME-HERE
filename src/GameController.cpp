@@ -119,7 +119,7 @@ void GameController::handleCollision()
 		{
 			if (m_movingObj[i]->checkCollision(*m_movingObj[j]))
 			{
-				m_movingObj[i]->collide(*m_movingObj[j]);
+				//m_movingObj[i]->collide(*m_movingObj[j]);
 				m_movingObj[j]->collide(*m_movingObj[i]);
 			}
 		}

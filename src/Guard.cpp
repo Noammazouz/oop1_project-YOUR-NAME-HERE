@@ -10,7 +10,7 @@ Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH
 void Guard::update(sf::Time deltaTime)
 {
     this->setPrevLocation(this->getPosition());
-    this->updatePosition(m_direction * (SPEED / 2) * deltaTime.asSeconds());
+    this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
 }
 
 void Guard::setDirection(sf::Vector2f position)
