@@ -22,19 +22,19 @@ public:
 
 	virtual void draw(sf::RenderWindow& window);
 	virtual sf::Vector2f getPosition() const;
-	virtual void staticCollide(GameObject& otherObject) = 0;
-	virtual ReturnType playerCollide(Player& otherObject) = 0;
-	//virtual void updateableCollide(GameObject& otherObject) = 0;
-	//virtual ReturnType doorCollide(Door& otherObject) = 0;
-	//virtual ReturnType guardCollide(Guard& otherObject) = 0;
-	//virtual ReturnType bombCollide(Bombs& otherobject) = 0;
-	// virtual ReturnType wallCollide(Wall& otherobject) = 0;
+	virtual void collide(GameObject& otherObject) = 0;
+	virtual void playerCollide(Player& otherObject) {};
+	//virtual void updateableCollide(GameObject& otherObject) {};
+	//virtual ReturnType doorCollide(Door& otherObject) {};
+	virtual void guardCollide(Guard& otherObject) = 0;
+	//virtual ReturnType bombCollide(Bombs& otherobject) {};
+	// virtual ReturnType wallCollide(Wall& otherobject) {};
 	////virtual void collide(presents& otherObject) = 0;
+	void setPosition(const sf::Vector2f& position);
 
 
 protected:
 	void updatePosition(sf::Vector2f direction);
-	void setPosition(const sf::Vector2f& position);
 
 private:
 	void setTexture(const sf::Texture& texture);

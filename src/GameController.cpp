@@ -98,14 +98,30 @@ void GameController::handleCollision()
 	{
 		if (m_player.checkCollision(*staticObj))
 		{
-			m_player.staticCollide(*staticObj);
+			m_player.collide(*staticObj);
 		}
 	}
-	//for (auto& movingObj : m_movingObj)
-	//{
-	//	if (m_player.checkCollision(*movingObj))
-	//	{
-	//		m_player.updateableCollide(*movingObj);
-	//	}
-	//}
+
+	for (const auto& movingObj : m_movingObj)
+	{
+		for (const auto& staticObj : m_staticObj)
+		{
+			if (movingObj->checkCollision(*staticObj))
+			{
+				movingObj->collide(*staticObj);
+			}
+		}
+	}
+
+	for (size_t i = 0; i < m_movingObj.size(); ++i)
+	{
+		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
+		{
+			if (m_movingObj[i]->checkCollision(*m_movingObj[j]))
+			{
+				m_movingObj[i]->collide(*m_movingObj[j]);
+				m_movingObj[j]->collide(*m_movingObj[i]);
+			}
+		}
+	}
 }

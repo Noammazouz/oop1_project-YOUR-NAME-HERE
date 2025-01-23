@@ -11,17 +11,15 @@ public:
 	void update(sf::Time deltaTime) override;
 	void setDirectionFromKeyboard(sf::Keyboard::Key key);
 	void setDirection(sf::Vector2f position) override;
-	virtual void staticCollide(GameObject& otherObject) override;
-	//virtual void updateableCollide(GameObject& otherObject) override;
+	virtual void collide(GameObject& otherObject) override;
 	//virtual bool doorCollide(Door& otherObject) override;
 	//virtual bool wallCollide(Wall& otherobject) override;
-	//virtual bool guardCollide(Guard& otherObject) override;
+	virtual void guardCollide(Guard& otherObject) override {};
 	//virtual bool bombCollide(Bombs& otherobject) override;
-	virtual ReturnType playerCollide(Player& otherObject) override { return DOOR; };  //CHANGE THIS ITS NOT SUPPOSED TO BE EMPTY
+	//virtual void playerCollide(Player& otherObject) override {};  //CHANGE THIS ITS NOT SUPPOSED TO BE EMPTY
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;
-	sf::Vector2f m_prevlocation;
 	int m_lives = 3;
 	int m_score = 0;
 };

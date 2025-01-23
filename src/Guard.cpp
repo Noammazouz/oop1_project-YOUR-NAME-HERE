@@ -9,6 +9,7 @@ Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH
 
 void Guard::update(sf::Time deltaTime)
 {
+    this->setPrevLocation(this->getPosition());
     this->updatePosition(m_direction * (SPEED / 2) * deltaTime.asSeconds());
 }
 
@@ -39,4 +40,14 @@ void Guard::setDirection(sf::Vector2f position)
 			m_direction = sf::Vector2f(1, 0); //right
         }
     }
+}
+
+void Guard::collide(GameObject& otherObject)
+{
+    otherObject.guardCollide(*this);
+}
+
+void Guard::guardCollide(Guard& otherObject)
+{
+	this->setPosition(this->getPrevLocation());
 }

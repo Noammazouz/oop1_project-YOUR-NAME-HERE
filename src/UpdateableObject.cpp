@@ -1,5 +1,5 @@
 #include "UpdateableObject.h"
-
+#include <iostream>
 
 
 UpdateableObject::UpdateableObject()
@@ -24,4 +24,13 @@ bool UpdateableObject::checkCollision(GameObject & otherObject)
 		return true;
 	}
 	return false;
+}
+
+void UpdateableObject::setPrevLocation(sf::Vector2f position)
+{
+	m_prev_location = position;
+}
+sf::Vector2f UpdateableObject::getPrevLocation() const
+{
+	return m_prev_location;
 }
