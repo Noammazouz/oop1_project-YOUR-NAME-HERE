@@ -24,12 +24,9 @@ public:
 	virtual sf::Vector2f getPosition() const;
 	virtual void collide(GameObject& otherObject) = 0;
 	virtual void playerCollide(Player& otherObject) {};
-	//virtual void updateableCollide(GameObject& otherObject) {};
 	//virtual ReturnType doorCollide(Door& otherObject) {};
 	virtual void guardCollide(Guard& otherObject) = 0;
 	//virtual ReturnType bombCollide(Bombs& otherobject) {};
-	// virtual ReturnType wallCollide(Wall& otherobject) {};
-	////virtual void collide(presents& otherObject) = 0;
 	void setPosition(const sf::Vector2f& position);
 
 
