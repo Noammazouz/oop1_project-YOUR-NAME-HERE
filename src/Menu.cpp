@@ -100,7 +100,6 @@ void Menu::drawHelp(sf::RenderWindow& window)
 	m_buttons.push_back(return_bouton);
 
 	help_explation.setTexture(ResourcesManager::getInstance().getTexture("explation"));
-	window.clear(sf::Color(80, 180, 200));
 	window.draw(help_explation);
 	window.draw(return_bouton);
 	window.display();
