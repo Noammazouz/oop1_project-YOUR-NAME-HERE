@@ -28,7 +28,12 @@ void ResourcesManager::loadTexture()
         {"wall", "wall.png"},
         {"empty", "empty.png"},
         {"menu", "menu.png"},
-        {"backround", {"helpBackground.png"}}
+        {"backround", "helpBackground.png"},
+        {"start game", "start game.png"},
+        {"exit", "exit.png"},
+        {"help", "help.png"},
+		{"return", "return.png"},
+        {"explation", "help screen.png"}
     };
 
     for (const auto& [name, filePath] : textures) 

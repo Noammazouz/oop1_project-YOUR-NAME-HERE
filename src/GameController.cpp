@@ -7,7 +7,8 @@ GameController::GameController()
 
 
 void GameController::newGame()
-{	
+{
+	m_menu.draw();
 	runLevel();
 }
 //---------
