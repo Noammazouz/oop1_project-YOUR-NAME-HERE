@@ -11,6 +11,7 @@ const int BOARD_STARTING_X = WIDTH / 8;
 const int BOARD_STARTING_Y = HEIGHT / 10;
 const float SPEED = 100.f;
 const int NUM_OF_BUTTON = 4;
+
 enum menuButtons {
 	START_GAME,
 	HELP,

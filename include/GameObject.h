@@ -38,4 +38,5 @@ private:
 	void setSprite(sf::Vector2f pos);
 	sf::Sprite m_pic;
 	float m_cell_size[2];
+	bool is_alive = true;
 };
