@@ -7,7 +7,8 @@ GameController::GameController()
 
 
 void GameController::newGame()
-{	
+{
+	m_menu.draw();
 	runLevel();
 }
 //---------
@@ -15,25 +16,47 @@ void GameController::runLevel()
 {
 	m_board.loadLevel();
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	m_board.LoadBoard(m_movingObj, m_staticObj);
+	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+	sf::Clock clock;
 	
 	while (window.isOpen())
 	{
-		// Clear the window
 		window.clear();
 
-		// Draw the sprite
-		
 		drawWindow(window);
-		// Display everything
+
 		window.display();
 		
 
 		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			switch (event.type)
+			{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::KeyPressed:
+				{
+					if (event.key.code == sf::Keyboard::Escape)
+					{
+						window.close();
+					}
+					else
+					{
+						m_player.setDirectionFromKeyboard(event.key.code);
+					}
+					break;
+				}
+				case sf::Event::KeyReleased:
+				{
+					m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
+					break;
+				}
+			}
 		}
+		
+		move(clock);
+		handleCollision();
 	}
 }
 
@@ -54,5 +77,52 @@ void  GameController::drawWindow(sf::RenderWindow& window)
 	for (const auto& movingObj : m_movingObj)
 	{
 		movingObj->draw(window);
+	}
+
+	m_player.draw(window);
+}
+void GameController::move(sf::Clock& clock)
+{
+	const auto deltaTime = clock.restart();
+
+	m_player.update(deltaTime);
+	for (auto& movingObj : m_movingObj)
+	{
+		movingObj->setDirection(m_player.getPosition());
+		movingObj->update(deltaTime);
+	}
+}
+
+void GameController::handleCollision()
+{
+	for (const auto& staticObj : m_staticObj)
+	{
+		if (m_player.checkCollision(*staticObj))
+		{
+			m_player.collide(*staticObj);
+		}
+	}
+
+	for (const auto& movingObj : m_movingObj)
+	{
+		for (const auto& staticObj : m_staticObj)
+		{
+			if (movingObj->checkCollision(*staticObj))
+			{
+				movingObj->collide(*staticObj);
+			}
+		}
+	}
+
+	for (size_t i = 0; i < m_movingObj.size(); ++i)
+	{
+		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
+		{
+			if (m_movingObj[i]->checkCollision(*m_movingObj[j]))
+			{
+				//m_movingObj[i]->collide(*m_movingObj[j]);
+				m_movingObj[j]->collide(*m_movingObj[i]);
+			}
+		}
 	}
 }

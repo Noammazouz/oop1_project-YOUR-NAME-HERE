@@ -6,3 +6,6 @@ StaticObject::StaticObject(sf::Vector2f position, const sf::Texture& texture, fl
 StaticObject::StaticObject()
 	: GameObject()
 {}
+StaticObject::StaticObject(const sf::Texture& texture, sf::Vector2f position)
+	: GameObject(texture, position)
+{}

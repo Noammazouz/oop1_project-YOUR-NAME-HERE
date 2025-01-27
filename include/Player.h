@@ -1,12 +1,25 @@
 #pragma once
 #include "UpdateableObject.h"
 
+class GameObject;
+
 class Player : public UpdateableObject
 {
 public:
+	Player();
 	Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT);
-	void update() override;
+	void update(sf::Time deltaTime) override;
+	void setDirectionFromKeyboard(sf::Keyboard::Key key);
+	void setDirection(sf::Vector2f position) override;
+	virtual void collide(GameObject& otherObject) override;
+	//virtual bool doorCollide(Door& otherObject) override;
+	//virtual bool wallCollide(Wall& otherobject) override;
+	virtual void guardCollide(Guard& otherObject) override {};
+	//virtual bool bombCollide(Bombs& otherobject) override;
+	//virtual void playerCollide(Player& otherObject) override {};  //CHANGE THIS ITS NOT SUPPOSED TO BE EMPTY
 	~Player() = default ;
 private:
-	sf::Vector2f m_position;
+	sf::Vector2f m_direction;
+	int m_lives = 3;
+	int m_score = 0;
 };

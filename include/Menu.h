@@ -1,23 +1,18 @@
 #pragma once 
-
+#include <vector>
+#include <SFML/Graphics.hpp>
 
 class Menu
 {
-	while (window.isOpen())
-	{
-		window.clear();
-		
-		if (auto event = sf::Event{}; window.waitEvent(event))
-		{
-			switch (event.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			case sf::Event::MouseButtonReleased:
-				//handleMouseEvents(window, event.mouseButton, current_tex);
-				break;
-			}
-		}
-	}
+public:
+	Menu() = default;
+	void draw();
+
+private:
+	bool m_help_window = false;
+	std::vector<sf::Sprite> m_buttons;
+
+	void drawWindow(sf::RenderWindow& window);
+	void handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseButtonEvent& event);
+	void drawHelp(sf::RenderWindow& window);
 };
