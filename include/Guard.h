@@ -11,10 +11,10 @@ public:
 	//virtual bool doorCollide(Door& otherObject) = 0;
 	//virtual bool wallCollide(Wall& otherobject) = 0;
 	virtual void guardCollide(Guard& otherObject) override;
-	//virtual bool bombCollide(Bombs& otherobject) = 0;
+	virtual void bombCollide(Bombs& otherobject) override;
 	//virtual bool playerCollide(Player& otherObject) = 0;
+
 private:
 	sf::Vector2f m_direction;
 	sf::Vector2f m_prevlocation;
-	bool m_isAlive = true;
 };

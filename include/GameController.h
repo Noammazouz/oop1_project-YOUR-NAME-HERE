@@ -26,6 +26,9 @@ private:
 	void drawWindow(sf::RenderWindow& window);
 	void move(sf::Clock& clock);
 	void handleCollision();
+	void setbomb(sf::RenderWindow& window);
+	void handleErasing();
+	void explosion();
 
 	Board m_board;
 	Player m_player;

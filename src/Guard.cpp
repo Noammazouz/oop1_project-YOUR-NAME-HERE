@@ -4,6 +4,7 @@
 Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
+    this->setID(GUARD);
 }
 
 
@@ -50,4 +51,9 @@ void Guard::collide(GameObject& otherObject)
 void Guard::guardCollide(Guard& otherObject)
 {
 	this->setPosition(this->getPrevLocation());
+}
+
+void Guard::bombCollide(Bombs& otherobject)
+{
+    this->setLife(true);
 }

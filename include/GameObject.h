@@ -15,7 +15,6 @@ class GameObject
 public:
 	GameObject();
 	GameObject(const sf::Texture& texture, sf::Vector2f pos, float CELL_WIDTH, float CELL_HEIGHT);
-	GameObject(const sf::Texture& texture, sf::Vector2f pos);
 	virtual ~GameObject() = default;
 
 	sf::FloatRect getBounds() const;
@@ -26,17 +25,16 @@ public:
 	virtual void playerCollide(Player& otherObject) {};
 	//virtual ReturnType doorCollide(Door& otherObject) {};
 	virtual void guardCollide(Guard& otherObject) = 0;
-	//virtual ReturnType bombCollide(Bombs& otherobject) {};
+	virtual void bombCollide(Bombs& otherobject) {};
 	void setPosition(const sf::Vector2f& position);
-
+	bool isDead() const;
 
 protected:
 	void updatePosition(sf::Vector2f direction);
-
+	void setLife(const bool life);
 private:
-	void setTexture(const sf::Texture& texture);
 	void setSprite(sf::Vector2f pos);
 	sf::Sprite m_pic;
 	float m_cell_size[2];
-	bool is_alive = true;
+	bool m_is_dead = false;
 };

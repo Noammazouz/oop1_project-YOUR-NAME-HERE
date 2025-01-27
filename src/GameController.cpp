@@ -41,6 +41,10 @@ void GameController::runLevel()
 					{
 						window.close();
 					}
+					if (event.key.code == sf::Keyboard::B)
+					{
+						setbomb(window);
+					}
 					else
 					{
 						m_player.setDirectionFromKeyboard(event.key.code);
@@ -57,6 +61,10 @@ void GameController::runLevel()
 		
 		move(clock);
 		handleCollision();
+		explosion();
+		handleErasing();
+		//to reset game and to dec player life
+		//to do leader board
 	}
 }
 
@@ -120,8 +128,37 @@ void GameController::handleCollision()
 		{
 			if (m_movingObj[i]->checkCollision(*m_movingObj[j]))
 			{
-				//m_movingObj[i]->collide(*m_movingObj[j]);
-				m_movingObj[j]->collide(*m_movingObj[i]);
+				m_movingObj[i]->collide(*m_movingObj[j]);
+			}
+		}
+	}
+}
+
+void GameController::setbomb(sf::RenderWindow& window)
+{
+	m_movingObj.push_back(std::make_unique<Bombs>(sf::Vector2f(m_player.getPosition()), ResourcesManager::getInstance().getTexture("bomb")));
+}
+
+void GameController::handleErasing()
+{
+	std::erase_if(m_movingObj, [](const auto& item)
+		{
+			return item->isDead(); });
+
+	std::erase_if(m_staticObj, [](const auto& item)
+		{
+			return item->isDead(); });
+}
+
+void GameController::explosion()
+{
+	for (size_t i = 0; i < m_movingObj.size(); ++i)
+	{
+		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
+		{
+			if (m_movingObj[i]->checkCollision(*m_movingObj[j]) && m_movingObj[i]->getId() != GUARD)
+			{
+				m_movingObj[i]->collide(*m_movingObj[j]);
 			}
 		}
 	}

@@ -18,12 +18,8 @@ enum menuButtons {
 	EXIT,
 	BACK
 };
-enum ReturnType {
-	DOOR,
-	WALL,
-	ROCK,
-	PRESENT,
+enum MovingID 
+{
 	GUARD,
-	BOMBS,
-	PLAYER,
+	BOMBS
 };

@@ -8,9 +8,9 @@ UpdateableObject::UpdateableObject()
 UpdateableObject::UpdateableObject(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: GameObject(texture, position, CELL_WIDTH, CELL_HEIGHT), m_starting_position(position.x + CELL_WIDTH / 2, position.y + CELL_HEIGHT / 2)
 {}
-UpdateableObject::UpdateableObject(const sf::Texture& texture, sf::Vector2f position)
-	: GameObject(texture, position)
-{}
+//UpdateableObject::UpdateableObject(const sf::Texture& texture, sf::Vector2f position)
+//	: GameObject(texture, position)
+//{}
 
 sf::Vector2f UpdateableObject::getStartingPosition(sf::Vector2f position) const
 {
@@ -33,4 +33,12 @@ void UpdateableObject::setPrevLocation(sf::Vector2f position)
 sf::Vector2f UpdateableObject::getPrevLocation() const
 {
 	return m_prev_location;
+}
+void UpdateableObject::setID(const MovingID& id)
+{
+	m_id = id;
+}
+MovingID UpdateableObject::getId() const
+{
+	return m_id;
 }

@@ -33,7 +33,8 @@ void ResourcesManager::loadTexture()
         {"exit", "exit.png"},
         {"help", "help.png"},
 		{"return", "return.png"},
-        {"explation", "help screen.png"}
+        {"explation", "help screen.png"},
+        {"bomb", "bomb.png"}
     };
 
     for (const auto& [name, filePath] : textures) 

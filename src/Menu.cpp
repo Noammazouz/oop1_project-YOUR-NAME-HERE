@@ -7,7 +7,7 @@
 void Menu::draw()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "MENU");
-	
+
 	while (window.isOpen())
 	{
 		window.clear();
@@ -53,12 +53,19 @@ void Menu::drawWindow(sf::RenderWindow& window)
 		m_buttons.push_back(pic);
 		window.draw(pic);
 	}
+
+	pic.setTexture(ResourcesManager::getInstance().getTexture("return"));
+	pic.setPosition(0, 0); 
+	pic.setOrigin(0,0);
+	pic.setScale(0.3, 0.3);
+	m_buttons.push_back(pic);
+
 	window.display();
 }
 
 void Menu::handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseButtonEvent& event)
 {
-	for (int boutton = 0; boutton < NUM_OF_BUTTON; ++boutton)
+	for (int boutton = 0; boutton < NUM_OF_BUTTON; boutton++)
 	{
 		if (m_buttons[boutton].getGlobalBounds().contains(event.x, event.y))
 		{
@@ -86,6 +93,8 @@ void Menu::handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseBut
 					drawWindow(window);
 					break;
 				}
+				default:
+					break;
 			}
 		}
 	}
@@ -93,15 +102,11 @@ void Menu::handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseBut
 
 void Menu::drawHelp(sf::RenderWindow& window)
 {
-	sf::Sprite return_bouton, help_explation;
-
-	return_bouton.setTexture(ResourcesManager::getInstance().getTexture("return"));
-	return_bouton.setScale(0.3, 0.3);
-	m_buttons.push_back(return_bouton);
+	sf::Sprite help_explation;
 
 	help_explation.setTexture(ResourcesManager::getInstance().getTexture("explation"));
 	window.draw(help_explation);
-	window.draw(return_bouton);
+	window.draw(m_buttons[m_buttons.size() - 1]);
 	window.display();
 	m_help_window = true;
 }
