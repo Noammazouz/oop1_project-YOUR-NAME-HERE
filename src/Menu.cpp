@@ -22,6 +22,7 @@ void Menu::draw()
 			{
 			case sf::Event::Closed:
 				window.close();
+				exit(EXIT_SUCCESS);
 				break;
 			case sf::Event::MouseButtonReleased:
 				handleMouseEvents(window, event.mouseButton);

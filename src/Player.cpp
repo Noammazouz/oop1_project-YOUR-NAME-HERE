@@ -18,13 +18,15 @@ void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 		 m_direction = sf::Vector2f(0, 0); 
 		 break;
     case sf::Keyboard::Key::Left:
-		 m_direction = sf::Vector2f(-1, 0); 
+		 m_direction = sf::Vector2f(-1, 0);
+		 this->mirrorImage(m_direction);
 		 break;
     case sf::Keyboard::Key::Down:
 		 m_direction = sf::Vector2f(0, 1); 
 		 break;
 	case sf::Keyboard::Key::Right:
 		m_direction = sf::Vector2f(1, 0);
+		this->mirrorImage(m_direction);
 		break;
 	case sf::Keyboard::Key::Up:
 		m_direction = sf::Vector2f(0, -1);

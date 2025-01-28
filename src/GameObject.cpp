@@ -36,6 +36,8 @@ void GameObject::updatePosition(sf::Vector2f direction)
 	float up_corner = direction.y + m_pic.getPosition().y - m_cell_size[1];
 	float right_corner = direction.x + m_pic.getPosition().x + m_cell_size[0];
 
+	
+
 	if (left_corner > BOARD_STARTING_X && up_corner > 0 && bottom_corner < HEIGHT && right_corner < WIDTH)
 	{
 		m_pic.move(direction);
@@ -60,4 +62,17 @@ void GameObject::setLife(const bool life)
 bool GameObject::isDead() const
 {
 	return m_is_dead;
+}
+void  GameObject::mirrorImage(sf::Vector2f direction)
+{
+	if (direction.x < 0 && m_facingRight)
+	{
+		m_pic.scale(-1, 1);
+		m_facingRight = false;
+	}
+	else if(direction.x > 0 && !m_facingRight)
+	{
+		m_pic.scale(-1, 1);
+		m_facingRight = true;
+	}
 }

@@ -15,6 +15,7 @@ void GameController::newGame()
 void GameController::runLevel()
 {
 	m_board.loadLevel();
+	Guard::resetNumOfGuards();
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
 	sf::Clock clock;
