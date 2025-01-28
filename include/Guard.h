@@ -13,8 +13,11 @@ public:
 	virtual void guardCollide(Guard& otherObject) override;
 	virtual void bombCollide(Bombs& otherobject) override;
 	//virtual bool playerCollide(Player& otherObject) = 0;
-
+	static void resetNumOfGuards();
+	~Guard();
 private:
+	static int m_num_of_guards;
+	static int m_num_of_guards_alive;
 	sf::Vector2f m_direction;
 	sf::Vector2f m_prevlocation;
 };

@@ -5,6 +5,8 @@ Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
     this->setID(GUARD);
+	m_num_of_guards++;
+	m_num_of_guards_alive++;
 }
 
 
@@ -57,3 +59,15 @@ void Guard::bombCollide(Bombs& otherobject)
 {
     this->setLife(true);
 }
+Guard::~Guard()
+{
+	m_num_of_guards_alive--;
+
+}
+void Guard::resetNumOfGuards()
+{
+	m_num_of_guards = 0;
+	m_num_of_guards_alive = 0;
+}
+int Guard::m_num_of_guards_alive = 0;
+int Guard::m_num_of_guards = 0;
