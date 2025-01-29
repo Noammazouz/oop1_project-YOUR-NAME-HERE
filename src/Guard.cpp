@@ -69,5 +69,14 @@ void Guard::resetNumOfGuards()
 	m_num_of_guards = 0;
 	m_num_of_guards_alive = 0;
 }
+int Guard::getNumOfStartingGuards()
+{
+	return m_num_of_guards;
+
+}
+int Guard::getNumOfGuardsAlive()
+{
+	return m_num_of_guards_alive;
+}
 int Guard::m_num_of_guards_alive = 0;
 int Guard::m_num_of_guards = 0;

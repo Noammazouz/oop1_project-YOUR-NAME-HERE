@@ -14,6 +14,8 @@ public:
 	virtual void bombCollide(Bombs& otherobject) override;
 	//virtual bool playerCollide(Player& otherObject) = 0;
 	static void resetNumOfGuards();
+	static int getNumOfStartingGuards();
+	static int getNumOfGuardsAlive();
 	~Guard();
 private:
 	static int m_num_of_guards;
