@@ -12,6 +12,10 @@ const int BOARD_STARTING_Y = HEIGHT / 10;
 const float SPEED = 100.f;
 const int NUM_OF_BUTTON = 4;
 const int NUM_OF_LIVES = 3;
+const int POINT_FOR_GUARD = 3;
+const int ENDING_LEVEL = 25;
+const int KILL_GUARD = 5;
+
 enum menuButtons {
 	START_GAME,
 	HELP,

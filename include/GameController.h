@@ -29,6 +29,7 @@ private:
 	void setbomb(sf::RenderWindow& window);
 	void handleErasing();
 	void explosion();
+	void calculateScore();
 
 	Board m_board;
 	Player m_player;

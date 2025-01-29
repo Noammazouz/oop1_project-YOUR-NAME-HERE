@@ -164,3 +164,11 @@ void GameController::explosion()
 		}
 	}
 }
+void GameController::calculateScore()
+{
+	int points = 0;
+	points += ENDING_LEVEL;
+	points += (Guard::getNumOfStartingGuards() * POINT_FOR_GUARD);
+	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
+	m_player.addScore(points);
+}
