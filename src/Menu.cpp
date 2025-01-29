@@ -49,16 +49,16 @@ void Menu::drawWindow(sf::RenderWindow& window)
 	{
 		pic.setTexture(resources.getTexture(buttons[boutton]));
 		pic.setOrigin(static_cast<float>(pic.getTexture()->getSize().x) / 2.0f, static_cast<float>(pic.getTexture()->getSize().y) / 2.0f);
-		pic.setPosition(WIDTH / 2, HEIGHT /5 + 300 * boutton);
-		pic.setScale(0.3, 0.3);
+		pic.setPosition(static_cast<float>(WIDTH / 2), static_cast<float>(HEIGHT /5 + 300 * boutton));
+		pic.setScale(static_cast<float>(0.3), static_cast<float>(0.3));
 		m_buttons.push_back(pic);
 		window.draw(pic);
 	}
 
 	pic.setTexture(ResourcesManager::getInstance().getTexture("return"));
-	pic.setPosition(0, 0); 
+	pic.setPosition(0, 0);
 	pic.setOrigin(0,0);
-	pic.setScale(0.3, 0.3);
+	pic.setScale(static_cast<float>(0.3), (0.3));
 	m_buttons.push_back(pic);
 
 	window.display();

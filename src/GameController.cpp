@@ -16,8 +16,11 @@ void GameController::runLevel()
 {
 	m_board.loadLevel();
 	Guard::resetNumOfGuards();
+
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+
+	sf::Time timer = sf::seconds(120);
 	sf::Clock clock;
 	
 	while (window.isOpen())
@@ -60,7 +63,7 @@ void GameController::runLevel()
 			}
 		}
 		
-		move(clock);
+		move(clock, timer);
 		handleCollision();
 		explosion();
 		handleErasing();
@@ -90,7 +93,7 @@ void  GameController::drawWindow(sf::RenderWindow& window)
 
 	m_player.draw(window);
 }
-void GameController::move(sf::Clock& clock)
+void GameController::move(sf::Clock& clock, sf::Time& timer)
 {
 	const auto deltaTime = clock.restart();
 
@@ -100,6 +103,7 @@ void GameController::move(sf::Clock& clock)
 		movingObj->setDirection(m_player.getPosition());
 		movingObj->update(deltaTime);
 	}
+	timer -= deltaTime;
 }
 
 void GameController::handleCollision()
