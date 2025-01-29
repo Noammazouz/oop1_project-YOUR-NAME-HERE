@@ -2,6 +2,7 @@
 
 
 GameController::GameController()
+	: m_level(1)
 {}
 
 
@@ -14,7 +15,10 @@ void GameController::newGame()
 //---------
 void GameController::runLevel()
 {
-	m_board.loadLevel();
+	if (m_board.loadLevel(m_level) == END_GAME)
+	{
+		//make the end game
+	}
 	Guard::resetNumOfGuards();
 
 	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");

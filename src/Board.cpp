@@ -16,7 +16,7 @@ Board::Board()
 {}
 
 //-----------------------
-void Board::loadLevel()
+int Board::loadLevel(const int& currStage)
 {
 	m_level.clear();
 	auto line = std::string();
@@ -25,8 +25,8 @@ void Board::loadLevel()
 
 	if (!file)
 	{
-		std::cout << "You are the best! You beat me!" << std::endl;
-		//return END_GAME;
+		//std::cout << "You are the best! You beat me!" << std::endl;
+		return END_GAME;
 	}
 
 	while (std::getline(file, line))
@@ -37,7 +37,7 @@ void Board::loadLevel()
 	m_rows = static_cast<int>(m_level.size());
 	m_cols = static_cast<int>(m_level[m_rows - 1].size());
 
-	//return currStage;
+	return currStage;
 }
 //-------------------------
 void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj

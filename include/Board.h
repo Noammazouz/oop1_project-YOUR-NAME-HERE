@@ -15,7 +15,7 @@ public:
 	Board();
 	void LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingObj
 		, std::vector<std::unique_ptr<StaticObject>>& m_staticObj, Player& m_player);
-	void loadLevel();
+	int loadLevel(const int& currStage);
 
 private:
 	std::vector<std::string> m_level;

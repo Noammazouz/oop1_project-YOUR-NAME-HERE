@@ -38,6 +38,7 @@ private:
 	Player m_player;
 	Menu m_menu;
 	Scoreboard m_scoreboard;
+	int m_level;
 	std::vector<std::unique_ptr<UpdateableObject>> m_movingObj;
 	std::vector<std::unique_ptr<StaticObject>> m_staticObj;
 };
