@@ -131,13 +131,13 @@ void GameController::handleCollision()
 		}
 	}
 
-	for (size_t i = 0; i < m_movingObj.size(); ++i)
+	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
 	{
-		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
+		for (size_t nextMoveObj = nextMoveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
 		{
-			if (m_movingObj[i]->checkCollision(*m_movingObj[j]))
+			if (m_movingObj[nextMoveObj]->checkCollision(*m_movingObj[nextMoveObj]))
 			{
-				m_movingObj[i]->collide(*m_movingObj[j]);
+				m_movingObj[nextMoveObj]->collide(*m_movingObj[nextMoveObj]);
 			}
 		}
 	}
@@ -161,13 +161,13 @@ void GameController::handleErasing()
 
 void GameController::explosion()
 {
-	for (size_t i = 0; i < m_movingObj.size(); ++i)
+	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
 	{
-		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
+		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
 		{
-			if (m_movingObj[i]->checkCollision(*m_movingObj[j])) //&& m_movingObj[i]->getId() != GUARD)
+			if (m_movingObj[moveObj]->checkCollision(*m_movingObj[nextMoveObj])) //&& m_movingObj[i]->getId() != GUARD)
 			{
-				m_movingObj[i]->collide(*m_movingObj[j]);
+				m_movingObj[moveObj]->collide(*m_movingObj[nextMoveObj]);
 			}
 		}
 	}
