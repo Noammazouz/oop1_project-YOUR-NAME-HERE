@@ -17,3 +17,6 @@ void Wall::guardCollide(Guard& otherObject)
 {
 	otherObject.setPosition(otherObject.getPrevLocation());
 }
+void  Wall::collide(GameObject& /*otherObject*/ )
+{
+}

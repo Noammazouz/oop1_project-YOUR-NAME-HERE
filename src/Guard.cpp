@@ -4,7 +4,7 @@
 Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
-    this->setID(GUARD);
+    //this->setID(GUARD);
 	m_num_of_guards++;
 	m_num_of_guards_alive++;
 }

@@ -22,10 +22,10 @@ public:
 	virtual void draw(sf::RenderWindow& window);
 	virtual sf::Vector2f getPosition() const;
 	virtual void collide(GameObject& otherObject) = 0;
-	virtual void playerCollide(Player& otherObject) {};
+	virtual void playerCollide(Player& otherObject);
 	//virtual ReturnType doorCollide(Door& otherObject) {};
 	virtual void guardCollide(Guard& otherObject) = 0;
-	virtual void bombCollide(Bombs& otherobject) {};
+	virtual void bombCollide(Bombs& otherobject);
 	void setPosition(const sf::Vector2f& position);
 	bool isDead() const;
 

@@ -51,7 +51,7 @@ void GameController::runLevel()
 					}
 					if (event.key.code == sf::Keyboard::B)
 					{
-						setbomb(window);
+						setbomb();
 					}
 					else
 					{
@@ -143,7 +143,7 @@ void GameController::handleCollision()
 	}
 }
 
-void GameController::setbomb(sf::RenderWindow& window)
+void GameController::setbomb()
 {
 	m_movingObj.push_back(std::make_unique<Bombs>(sf::Vector2f(m_player.getPosition()), ResourcesManager::getInstance().getTexture("bomb")));
 }
@@ -165,7 +165,7 @@ void GameController::explosion()
 	{
 		for (size_t j = i + 1; j < m_movingObj.size(); ++j)
 		{
-			if (m_movingObj[i]->checkCollision(*m_movingObj[j]) && m_movingObj[i]->getId() != GUARD)
+			if (m_movingObj[i]->checkCollision(*m_movingObj[j])) //&& m_movingObj[i]->getId() != GUARD)
 			{
 				m_movingObj[i]->collide(*m_movingObj[j]);
 			}
@@ -178,5 +178,5 @@ void GameController::calculateScore()
 	points += ENDING_LEVEL;
 	points += (Guard::getNumOfStartingGuards() * POINT_FOR_GUARD);
 	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
-	m_player.addScore(points);
+	//m_player.addScore(points);
 }

@@ -12,7 +12,7 @@ UpdateableObject::UpdateableObject(sf::Vector2f position, const sf::Texture& tex
 //	: GameObject(texture, position)
 //{}
 
-sf::Vector2f UpdateableObject::getStartingPosition(sf::Vector2f position) const
+sf::Vector2f UpdateableObject::getStartingPosition() const
 {
 	return m_starting_position;
 }
@@ -34,11 +34,11 @@ sf::Vector2f UpdateableObject::getPrevLocation() const
 {
 	return m_prev_location;
 }
-void UpdateableObject::setID(const MovingID& id)
-{
-	m_id = id;
-}
-MovingID UpdateableObject::getId() const
-{
-	return m_id;
-}
+//void UpdateableObject::setID(const MovingID& id)
+//{
+//	m_id = id;
+//}
+//MovingID UpdateableObject::getId() const
+//{
+//	return m_id;
+//}

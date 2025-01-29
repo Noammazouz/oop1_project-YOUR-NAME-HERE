@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-int Player::m_score = 0;
+//int Player::m_score = 0;
 Player::Player()
 {
 }
@@ -47,8 +47,10 @@ void Player::collide(GameObject& otherObject)
 {
 	otherObject.playerCollide(*this);
 }
-
-void Player::addScore(int score)
+void Player::guardCollide(Guard& /*otherObject*/)
 {
-	m_score += score;
 }
+//void Player::addScore(int score)
+//{
+//	m_score += score;
+//}

@@ -16,3 +16,7 @@ void Rock::guardCollide(Guard& otherObject)
 {
 	otherObject.setPosition(otherObject.getPrevLocation());
 }
+
+void Rock::collide(GameObject& /*otherObject*/ )
+{
+}

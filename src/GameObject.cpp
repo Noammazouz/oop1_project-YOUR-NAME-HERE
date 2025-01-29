@@ -63,6 +63,7 @@ bool GameObject::isDead() const
 {
 	return m_is_dead;
 }
+
 void  GameObject::mirrorImage(sf::Vector2f direction)
 {
 	if (direction.x < 0 && m_facingRight)
@@ -75,4 +76,12 @@ void  GameObject::mirrorImage(sf::Vector2f direction)
 		m_pic.scale(-1, 1);
 		m_facingRight = true;
 	}
+}
+
+void GameObject::playerCollide(Player& /*otherObject*/)
+{
+}
+
+void  GameObject::bombCollide(Bombs& /*otherobject*/)
+{
 }

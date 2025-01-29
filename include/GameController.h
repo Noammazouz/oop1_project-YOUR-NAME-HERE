@@ -26,7 +26,7 @@ private:
 	void drawWindow(sf::RenderWindow& window);
 	void move(sf::Clock& clock, sf::Time& timer);
 	void handleCollision();
-	void setbomb(sf::RenderWindow& window);
+	void setbomb();
 	void handleErasing();
 	void explosion();
 	void calculateScore();

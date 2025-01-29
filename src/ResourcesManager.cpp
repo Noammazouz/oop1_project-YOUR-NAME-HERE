@@ -37,7 +37,7 @@ void ResourcesManager::loadTexture()
         {"bomb", "bomb.png"},
 		{"freeze", "freeze.png"},
 		//{"remove", "remove.png"},
-		{"add time", "add time.png"}
+		{"add time", "add_time.png"}
 		//{"scoreboard", "scoreboard.png"},
 		//{"score", "score.png"},
 		//{"time", "time.png"},
