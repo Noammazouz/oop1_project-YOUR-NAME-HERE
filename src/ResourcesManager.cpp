@@ -34,7 +34,15 @@ void ResourcesManager::loadTexture()
         {"help", "help.png"},
 		{"return", "return.png"},
         {"explation", "help screen.png"},
-        {"bomb", "bomb.png"}
+        {"bomb", "bomb.png"},
+		{"freeze", "freeze.png"},
+		//{"remove", "remove.png"},
+		{"add time", "add time.png"}
+		//{"scoreboard", "scoreboard.png"},
+		//{"score", "score.png"},
+		//{"time", "time.png"},
+		//{"game over", "game over.png"},
+        //{"win", "win.png"}
     };
 
     for (const auto& [name, filePath] : textures) 
