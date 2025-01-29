@@ -1,5 +1,7 @@
 ﻿#configure_file ("Wall.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("menuMusic.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("loss.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("win.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Arial.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("PixelFontBlack.otf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("PixelFontWhite.otf" ${CMAKE_BINARY_DIR} COPYONLY)
