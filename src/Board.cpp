@@ -6,6 +6,10 @@
 #include "Rock.h"
 #include "Wall.h"
 #include "Door.h"
+#include "AddingTime.h"
+#include "IncreasingLife.h"
+#include "FreezingGuards.h"
+#include "RemovingGuard.h"
 
 Board::Board()
 	: m_rows(0), m_cols(0)
@@ -68,6 +72,14 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 				break;
 			case '!': // Guard
 				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("guard"), CELL_WIDTH, CELL_HEIGHT));
+				break;
+			case '+': // add time
+				break;
+			case '-': // remove guard
+				break;
+			case '*': // freeze guard
+				break;
+			case '$': // add life
 				break;
 			}
 		}
