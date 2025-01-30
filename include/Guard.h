@@ -12,7 +12,7 @@ public:
 	//virtual bool wallCollide(Wall& otherobject) = 0;
 	virtual void guardCollide(Guard& otherObject) override;
 	virtual void bombCollide(Bombs& otherobject) override;
-	//virtual bool playerCollide(Player& otherObject) = 0;
+	virtual void playerCollide(Player& otherObject) override;
 	static void resetNumOfGuards();
 	static int getNumOfStartingGuards();
 	static int getNumOfGuardsAlive();

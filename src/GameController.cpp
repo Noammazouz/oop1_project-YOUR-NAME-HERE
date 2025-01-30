@@ -130,6 +130,18 @@ void GameController::handleCollision()
 			}
 		}
 	}
+	for (const auto& movingObj : m_movingObj)
+	{
+		if (m_player.checkCollision(*movingObj))
+		{
+			m_player.collide(*movingObj);
+			for (const auto& movingObj : m_movingObj)
+			{
+				movingObj->setPosition(movingObj->getStartingPosition());
+			}
+			break;
+		}
+	}
 
 	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
 	{

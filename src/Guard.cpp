@@ -1,5 +1,6 @@
 #include "Guard.h"
 #include <iostream>
+#include "Player.h"
 
 Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
@@ -77,6 +78,11 @@ int Guard::getNumOfStartingGuards()
 int Guard::getNumOfGuardsAlive()
 {
 	return m_num_of_guards_alive;
+}
+
+void Guard::playerCollide(Player& otherObject)
+{
+	otherObject.setPosition(otherObject.getStartingPosition());
 }
 int Guard::m_num_of_guards_alive = 0;
 int Guard::m_num_of_guards = 0;
