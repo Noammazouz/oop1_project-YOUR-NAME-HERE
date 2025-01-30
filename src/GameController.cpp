@@ -135,11 +135,7 @@ void GameController::handleCollision()
 		if (m_player.checkCollision(*movingObj))
 		{
 			m_player.collide(*movingObj);
-			/*for (const auto& movingObj : m_movingObj)
-			{
-				movingObj->setPosition(movingObj->getStartingPosition());
-			}*/
-			for (size_t index = 0; index < m_movingObj.size(); ++index)
+			for (size_t index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
 			{
 				m_movingObj[index]->setPosition(m_movingObj[index]->getStartingPosition());
 			}
