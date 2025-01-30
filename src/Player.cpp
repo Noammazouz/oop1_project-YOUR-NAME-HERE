@@ -47,8 +47,19 @@ void Player::collide(GameObject& otherObject)
 {
 	otherObject.playerCollide(*this);
 }
+
 void Player::guardCollide(Guard& /*otherObject*/)
 {
+}
+
+void Player::decLife()
+{
+	m_lives--;
+}
+
+int Player::getLife() const
+{
+	return m_lives;
 }
 //void Player::addScore(int score)
 //{

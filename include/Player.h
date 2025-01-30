@@ -17,7 +17,8 @@ public:
 	virtual void guardCollide(Guard& otherObject) override;
 	//virtual bool bombCollide(Bombs& otherobject) override;
 	//virtual void playerCollide(Player& otherObject) override {};  //CHANGE THIS ITS NOT SUPPOSED TO BE EMPTY
-	//void addScore(int score);
+	void decLife();
+	int getLife() const;
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;

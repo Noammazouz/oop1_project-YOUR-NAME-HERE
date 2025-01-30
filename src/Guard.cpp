@@ -83,6 +83,7 @@ int Guard::getNumOfGuardsAlive()
 void Guard::playerCollide(Player& otherObject)
 {
 	otherObject.setPosition(otherObject.getStartingPosition());
+	otherObject.decLife();
 }
 int Guard::m_num_of_guards_alive = 0;
 int Guard::m_num_of_guards = 0;
