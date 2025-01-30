@@ -133,11 +133,11 @@ void GameController::handleCollision()
 
 	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
 	{
-		for (size_t nextMoveObj = nextMoveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
+		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
 		{
-			if (m_movingObj[nextMoveObj]->checkCollision(*m_movingObj[nextMoveObj]))
+			if (m_movingObj[moveObj]->checkCollision(*m_movingObj[nextMoveObj]))
 			{
-				m_movingObj[nextMoveObj]->collide(*m_movingObj[nextMoveObj]);
+				m_movingObj[moveObj]->collide(*m_movingObj[nextMoveObj]);
 			}
 		}
 	}
