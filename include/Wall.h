@@ -9,7 +9,6 @@ public:
 	//virtual ReturnType doorCollide(Door& otherObject) override {};
 	//virtual ReturnType wallCollide(Wall& otherobject) override{};
 	virtual void guardCollide(Guard& otherObject) override;
-	//virtual ReturnType bombCollide(Bombs& otherobject) override {};
 	virtual void playerCollide(Player& otherObject) override;
 	~Wall() = default;
 };

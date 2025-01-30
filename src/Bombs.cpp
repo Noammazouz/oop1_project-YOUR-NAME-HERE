@@ -3,9 +3,8 @@
 
 
 Bombs::Bombs(sf::Vector2f position, const sf::Texture& texture)
-    : UpdateableObject(position, texture, 32.f, 32.f), m_timer(sf::seconds(4))
+    : UpdateableObject(position, texture, BOMB_WIDTH, BOMB_HEIGHT), m_timer(sf::seconds(BOMB_TIME))
 {
-    //this->setID(BOMBS);
 }
 
 void Bombs::update(sf::Time deltaTime)
@@ -18,10 +17,8 @@ void Bombs::update(sf::Time deltaTime)
     }
 }
 
-void Bombs::collide(GameObject& otherobject)
+void Bombs::collide(GameObject& /*otherobject*/)
 {
-    std::cout << "im here at collide at bombs.cpp" << std::endl;
-    otherobject.bombCollide(*this);
 }
 
 void Bombs::setDirection(sf::Vector2f /*position*/)

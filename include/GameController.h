@@ -14,6 +14,7 @@
 #include "GameObject.h"
 #include "Menu.h"
 #include "Scoreboard.h"
+#include "Explosion.h"
 
 class GameController
 {
@@ -28,10 +29,12 @@ private:
 	void handleCollision();
 	void setbomb();
 	void handleErasing();
-	void explosion();
+	void explosion(sf::RenderWindow& window);
 	void calculateScore();
-
+	void setExpoDirection(int index);
 	void resetGuardPos();
+	void checkExpo();
+	void checkVaildDraw();
 	//to make the freezing guard
 	//to make the removing guard
 	// to make the add time for game

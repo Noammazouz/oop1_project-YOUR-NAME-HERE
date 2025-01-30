@@ -32,9 +32,7 @@ void GameController::runLevel()
 		window.clear();
 
 		drawWindow(window);
-
 		window.display();
-		
 
 		for (auto event = sf::Event{}; window.pollEvent(event);)
 		{
@@ -69,7 +67,7 @@ void GameController::runLevel()
 		
 		move(clock, timer);
 		handleCollision();
-		explosion();
+		explosion(window);
 		handleErasing();
 		//to reset game and to dec player life
 		//to do leader board
@@ -135,7 +133,7 @@ void GameController::handleCollision()
 			}
 		}
 	}
-	/*for (size_t guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
+	/*for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
 	{
 		if (m_player.checkCollision(*m_movingObj[guard]))
 		{
@@ -145,9 +143,9 @@ void GameController::handleCollision()
 		}
 	}*/
 
-	for (size_t moveObj = 0; moveObj < (Guard::getNumOfGuardsAlive()-1); ++moveObj)
+	for (int moveObj = 0; moveObj < (Guard::getNumOfGuardsAlive()-1); ++moveObj)
 	{
-		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < Guard::getNumOfGuardsAlive(); ++nextMoveObj)
+		for (int nextMoveObj = moveObj + 1; nextMoveObj < Guard::getNumOfGuardsAlive(); ++nextMoveObj)
 		{
 			if (m_movingObj[moveObj]->checkCollision(*m_movingObj[nextMoveObj]))
 			{
@@ -165,15 +163,13 @@ void GameController::setbomb()
 void GameController::handleErasing()
 {
 	std::erase_if(m_movingObj, [](const auto& item)
-		{
-			return item->isDead(); });
+		{return item->isDead(); });
 
 	std::erase_if(m_staticObj, [](const auto& item)
-		{
-			return item->isDead(); });
+		{return item->isDead(); });
 }
 
-void GameController::explosion()
+void GameController::explosion(sf::RenderWindow& window)
 {
 	auto bomb = Guard::getNumOfGuardsAlive();
 
@@ -181,27 +177,10 @@ void GameController::explosion()
 	{
 		if (m_movingObj[bomb]->getExpo())
 		{
-			for (int direction = 0; direction < NUM_OF_DIRECTION; direction++)
-			{
-				m_movingObj[bomb]->setDirection(sf::Vector2f(m_movingObj[bomb]->getPosition().x+32.f, m_movingObj[bomb]->getPosition().y + 32.f));
-			}
-			m_movingObj[bomb]->setDirection(m_movingObj[bomb]->getPosition());
-			std::cout << "in expo if" << std::endl;
-			for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); guard++)
-			{
-				if (m_movingObj[bomb]->checkCollision(*m_movingObj[guard]))
-				{
-					m_movingObj[bomb]->collide(*m_movingObj[guard]);
-
-				}
-			}
-			if (m_movingObj[bomb]->checkCollision(m_player))
-			{
-				m_movingObj[bomb]->collide(m_player);
-				resetGuardPos();
-				break;
-			}
-			
+			setExpoDirection(bomb);
+			checkVaildDraw();
+			drawWindow(window);
+			checkExpo();	
 		}
 	}
 }
@@ -220,4 +199,70 @@ void GameController::resetGuardPos()
 	{
 		m_movingObj[index]->setPosition(m_movingObj[index]->getStartingPosition());
 	}
+}
+
+void GameController::setExpoDirection(int index)
+{
+	for (int direction = 0; direction < NUM_OF_DIRECTION; direction++)
+	{
+		switch(direction)
+		{
+		case UP:
+			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, -BOMB_WIDTH));
+			break;
+		case DOWN:
+			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, BOMB_WIDTH));
+			break;
+		case LEFT:
+			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(-BOMB_WIDTH, 0));
+			break;
+		case RIGHT:
+			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(BOMB_WIDTH, 0));
+			break;
+		}
+	}
+	m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
+}
+void GameController::checkExpo()
+{
+	auto explosion = m_movingObj.size() - NUM_OF_EXPLOSION;
+	for (; explosion < m_movingObj.size(); explosion++)
+	{
+		for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); guard++)
+		{
+			if (m_movingObj[explosion]->checkCollision(*m_movingObj[guard]))
+			{
+				m_movingObj[explosion]->collide(*m_movingObj[guard]);
+
+			}
+		}
+
+		//if (m_movingObj[explosion]->checkCollision(m_player))
+		//{
+		//	m_movingObj[explosion]->collide(m_player);
+		//	//resetGuardPos();
+		//	break;
+		//}
+	}
+}
+
+void GameController::checkVaildDraw()
+{
+	auto explosion = m_movingObj.size() - NUM_OF_EXPLOSION;
+	for (; explosion < m_movingObj.size(); explosion++)
+	{
+		for (const auto& staticObj : m_staticObj)
+		{
+			if (m_movingObj[explosion]->checkCollision(*staticObj))
+			{
+				std::cout << "in check valud draw" << std::endl;
+				staticObj->collide(*m_movingObj[explosion]);
+			}
+		}
+	}
+	handleErasing();
 }

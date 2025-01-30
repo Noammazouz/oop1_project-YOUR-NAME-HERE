@@ -53,12 +53,11 @@ void Guard::collide(GameObject& otherObject)
 
 void Guard::guardCollide(Guard& otherObject)
 {
-	this->setPosition(this->getPrevLocation());
+	otherObject.setPosition(otherObject.getPrevLocation());
 }
 
-void Guard::bombCollide(Bombs& otherobject)
+void Guard::explosionCollide(Explosion& otherobject)
 {
-    std::cout << " im here at bombcollide" << std::endl;
     this->setLife(true);
 }
 Guard::~Guard()

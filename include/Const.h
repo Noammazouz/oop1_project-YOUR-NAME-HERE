@@ -16,8 +16,21 @@ const int POINT_FOR_GUARD = 3;
 const int ENDING_LEVEL = 25;
 const int KILL_GUARD = 5;
 const int NUM_OF_DIRECTION = 4;
+const float BOMB_WIDTH = 32.f;
+const float BOMB_HEIGHT = 32.f;
+const float BOMB_TIME = 4.f;
+const int NUM_OF_EXPLOSION = 5;
 
-enum menuButtons {
+enum Direction 
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
+enum menuButtons 
+{
 	START_GAME,
 	HELP,
 	EXIT,
