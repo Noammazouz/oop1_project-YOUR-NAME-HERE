@@ -101,11 +101,16 @@ void GameController::move(sf::Clock& clock, sf::Time& timer)
 {
 	const auto deltaTime = clock.restart();
 
+	int index = 0;
 	m_player.update(deltaTime);
-	for (auto& movingObj : m_movingObj)
+	for (const auto& movingObj : m_movingObj)
 	{
-		movingObj->setDirection(m_player.getPosition());
+		if (index < Guard::getNumOfGuardsAlive())
+		{
+			movingObj->setDirection(m_player.getPosition());
+		}
 		movingObj->update(deltaTime);
+		index++;
 	}
 	timer -= deltaTime;
 }
@@ -130,22 +135,19 @@ void GameController::handleCollision()
 			}
 		}
 	}
-	for (const auto& movingObj : m_movingObj)
+	/*for (size_t guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
 	{
-		if (m_player.checkCollision(*movingObj))
+		if (m_player.checkCollision(*m_movingObj[guard]))
 		{
-			m_player.collide(*movingObj);
-			for (size_t index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
-			{
-				m_movingObj[index]->setPosition(m_movingObj[index]->getStartingPosition());
-			}
+			m_player.collide(*m_movingObj[guard]);
+			resetGuardPos();
 			break;
 		}
-	}
+	}*/
 
-	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
+	for (size_t moveObj = 0; moveObj < (Guard::getNumOfGuardsAlive()-1); ++moveObj)
 	{
-		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
+		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < Guard::getNumOfGuardsAlive(); ++nextMoveObj)
 		{
 			if (m_movingObj[moveObj]->checkCollision(*m_movingObj[nextMoveObj]))
 			{
@@ -173,14 +175,33 @@ void GameController::handleErasing()
 
 void GameController::explosion()
 {
-	for (size_t moveObj = 0; moveObj < m_movingObj.size(); ++moveObj)
+	auto bomb = Guard::getNumOfGuardsAlive();
+
+	for (; bomb < m_movingObj.size(); bomb++)
 	{
-		for (size_t nextMoveObj = moveObj + 1; nextMoveObj < m_movingObj.size(); ++nextMoveObj)
+		if (m_movingObj[bomb]->getExpo())
 		{
-			if (m_movingObj[moveObj]->checkCollision(*m_movingObj[nextMoveObj])) //&& m_movingObj[i]->getId() != GUARD)
+			for (int direction = 0; direction < NUM_OF_DIRECTION; direction++)
 			{
-				m_movingObj[moveObj]->collide(*m_movingObj[nextMoveObj]);
+				m_movingObj[bomb]->setDirection(sf::Vector2f(m_movingObj[bomb]->getPosition().x+32.f, m_movingObj[bomb]->getPosition().y + 32.f));
 			}
+			m_movingObj[bomb]->setDirection(m_movingObj[bomb]->getPosition());
+			std::cout << "in expo if" << std::endl;
+			for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); guard++)
+			{
+				if (m_movingObj[bomb]->checkCollision(*m_movingObj[guard]))
+				{
+					m_movingObj[bomb]->collide(*m_movingObj[guard]);
+
+				}
+			}
+			if (m_movingObj[bomb]->checkCollision(m_player))
+			{
+				m_movingObj[bomb]->collide(m_player);
+				resetGuardPos();
+				break;
+			}
+			
 		}
 	}
 }
@@ -191,4 +212,12 @@ void GameController::calculateScore()
 	points += (Guard::getNumOfStartingGuards() * POINT_FOR_GUARD);
 	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
 	//m_player.addScore(points);
+}
+
+void GameController::resetGuardPos()
+{
+	for (size_t index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
+	{
+		m_movingObj[index]->setPosition(m_movingObj[index]->getStartingPosition());
+	}
 }

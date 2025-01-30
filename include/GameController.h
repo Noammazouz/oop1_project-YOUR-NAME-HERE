@@ -30,6 +30,8 @@ private:
 	void handleErasing();
 	void explosion();
 	void calculateScore();
+
+	void resetGuardPos();
 	//to make the freezing guard
 	//to make the removing guard
 	// to make the add time for game

@@ -34,11 +34,12 @@ sf::Vector2f UpdateableObject::getPrevLocation() const
 {
 	return m_prev_location;
 }
-//void UpdateableObject::setID(const MovingID& id)
-//{
-//	m_id = id;
-//}
-//MovingID UpdateableObject::getId() const
-//{
-//	return m_id;
-//}
+sf::Time UpdateableObject::getTimer() const
+{
+	return sf::Time (sf::seconds(0));
+}
+
+bool UpdateableObject::getExpo() const
+{
+	return false;
+}

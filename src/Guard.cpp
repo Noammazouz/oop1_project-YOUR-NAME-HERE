@@ -58,6 +58,7 @@ void Guard::guardCollide(Guard& otherObject)
 
 void Guard::bombCollide(Bombs& otherobject)
 {
+    std::cout << " im here at bombcollide" << std::endl;
     this->setLife(true);
 }
 Guard::~Guard()

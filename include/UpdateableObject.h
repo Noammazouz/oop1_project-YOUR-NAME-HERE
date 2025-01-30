@@ -14,14 +14,14 @@ public:
 	virtual ~UpdateableObject() = default;
 	virtual bool checkCollision(GameObject& otherObject);
 	sf::Vector2f getPrevLocation() const;
-	//MovingID getId() const;
+
+	virtual sf::Time getTimer() const;
+
+	virtual bool getExpo() const;
 
 protected:
 	void setPrevLocation(sf::Vector2f position);
-	//void setID(const MovingID& id);
-
 private:
 	sf::Vector2f m_starting_position;
 	sf::Vector2f m_prev_location;
-	//MovingID m_id;
 };
