@@ -24,21 +24,22 @@ public:
 private:
 
 	void runLevel();
-	void drawWindow(sf::RenderWindow& window);
+	void drawWindow();
 	void move(sf::Clock& clock, sf::Time& timer);
 	void handleCollision();
 	void setbomb();
 	void handleErasing();
-	void explosion(sf::RenderWindow& window);
+	void explosion();
 	void calculateScore();
 	void setExpoDirection(int index);
-	void resetGuardPos();
+	void resetLevel();
 	void checkExpo();
 	void checkVaildDraw();
 	//to make the freezing guard
 	//to make the removing guard
 	// to make the add time for game
 
+	sf::RenderWindow m_window;
 	Board m_board;
 	Player m_player;
 	Menu m_menu;

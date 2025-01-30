@@ -13,11 +13,15 @@ public:
 	void setDirection(sf::Vector2f position) override;
 	virtual void collide(GameObject& otherObject) override;
 	virtual void guardCollide(Guard& otherObject) override;
+	virtual void explosionCollide(Explosion& otherobject) override;
 
+	void setWin(bool win);
+	bool getWin() const;
 	void decLife();
 	int getLife() const;
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;
 	int m_lives = NUM_OF_LIVES;
+	bool m_win = false;
 };

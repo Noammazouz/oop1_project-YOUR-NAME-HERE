@@ -52,6 +52,12 @@ void Player::guardCollide(Guard& /*otherObject*/)
 {
 }
 
+void Player::explosionCollide(Explosion& otherobject)
+{
+	this->setPosition(this->getStartingPosition());
+	decLife();
+}
+
 void Player::decLife()
 {
 	m_lives--;
@@ -60,6 +66,16 @@ void Player::decLife()
 int Player::getLife() const
 {
 	return m_lives;
+}
+
+void Player::setWin(bool win)
+{
+	m_win = win;
+}
+
+bool Player::getWin() const
+{
+	return m_win;
 }
 //void Player::addScore(int score)
 //{

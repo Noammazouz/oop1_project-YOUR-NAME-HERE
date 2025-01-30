@@ -28,9 +28,3 @@ void Explosion::setDirection(sf::Vector2f position)
 {
 	this->updatePosition(position);
 }
-
-void Explosion::wallCollide(Wall& otherObject)
-{
-	std::cout << "in wall collide" << std::endl;
-	this->setLife(true);
-}

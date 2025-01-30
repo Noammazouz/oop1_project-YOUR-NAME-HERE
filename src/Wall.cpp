@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "Guard.h"
 #include "Explosion.h"
-#include <iostream>
 
 Wall::Wall(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: StaticObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
@@ -19,7 +18,11 @@ void Wall::guardCollide(Guard& otherObject)
 	otherObject.setPosition(otherObject.getPrevLocation());
 }
 
-void  Wall::collide(GameObject& otherObject)
+void  Wall::collide(GameObject& /*otherObject*/)
 {
-	otherObject.wallCollide(*this);
+}
+
+void  Wall::explosionCollide(Explosion& otherobject)
+{
+	otherobject.setLife(true);
 }

@@ -20,3 +20,8 @@ void Rock::guardCollide(Guard& otherObject)
 void Rock::collide(GameObject& /*otherObject*/ )
 {
 }
+
+void Rock::explosionCollide(Explosion& otherobject)
+{
+	this->setLife(true);
+}

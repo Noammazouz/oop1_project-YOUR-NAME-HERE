@@ -2,7 +2,7 @@
 
 
 GameController::GameController()
-	: m_level(1)
+	: m_level(1), m_window(sf::VideoMode(WIDTH, HEIGHT), "level")
 {}
 
 
@@ -15,37 +15,38 @@ void GameController::newGame()
 //---------
 void GameController::runLevel()
 {
+	//auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
+	m_movingObj.clear();
+	m_staticObj.clear();
 	if (m_board.loadLevel(m_level) == END_GAME)
 	{
 		//make the end game
 	}
 	Guard::resetNumOfGuards();
-
-	auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
 
 	sf::Time timer = sf::seconds(120);
 	sf::Clock clock;
 	
-	while (window.isOpen())
+	while (m_window.isOpen())
 	{
-		window.clear();
+		m_window.clear();
 
-		drawWindow(window);
-		window.display();
+		drawWindow();
+		m_window.display();
 
-		for (auto event = sf::Event{}; window.pollEvent(event);)
+		for (auto event = sf::Event{}; m_window.pollEvent(event);)
 		{
 			switch (event.type)
 			{
 				case sf::Event::Closed:
-					window.close();
+					m_window.close();
 					break;
 				case sf::Event::KeyPressed:
 				{
 					if (event.key.code == sf::Keyboard::Escape)
 					{
-						window.close();
+						m_window.close();
 					}
 					if (event.key.code == sf::Keyboard::B)
 					{
@@ -67,33 +68,39 @@ void GameController::runLevel()
 		
 		move(clock, timer);
 		handleCollision();
-		explosion(window);
+		explosion();
 		handleErasing();
+		if (m_player.getWin())
+		{
+			m_level++;
+			calculateScore();
+			runLevel();
+		}
 		//to reset game and to dec player life
 		//to do leader board
 	}
 }
 
-void  GameController::drawWindow(sf::RenderWindow& window)
+void  GameController::drawWindow()
 {
 	ResourcesManager& resources = ResourcesManager::getInstance();
 	sf::Sprite backround;
 
 	backround.setTexture(resources.getTexture("backround"));
-	window.draw(backround);
+	m_window.draw(backround);
 
 	for (const auto& staticObj : m_staticObj)
 	{
-		staticObj->draw(window);
+		staticObj->draw(m_window);
 	}
 
 	// Draw moving objects
 	for (const auto& movingObj : m_movingObj)
 	{
-		movingObj->draw(window);
+		movingObj->draw(m_window);
 	}
 
-	m_player.draw(window);
+	m_player.draw(m_window);
 }
 void GameController::move(sf::Clock& clock, sf::Time& timer)
 {
@@ -133,15 +140,15 @@ void GameController::handleCollision()
 			}
 		}
 	}
-	/*for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
+	for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
 	{
 		if (m_player.checkCollision(*m_movingObj[guard]))
 		{
 			m_player.collide(*m_movingObj[guard]);
-			resetGuardPos();
+			resetLevel();
 			break;
 		}
-	}*/
+	}
 
 	for (int moveObj = 0; moveObj < (Guard::getNumOfGuardsAlive()-1); ++moveObj)
 	{
@@ -169,7 +176,7 @@ void GameController::handleErasing()
 		{return item->isDead(); });
 }
 
-void GameController::explosion(sf::RenderWindow& window)
+void GameController::explosion()
 {
 	auto bomb = Guard::getNumOfGuardsAlive();
 
@@ -179,7 +186,7 @@ void GameController::explosion(sf::RenderWindow& window)
 		{
 			setExpoDirection(bomb);
 			checkVaildDraw();
-			drawWindow(window);
+			drawWindow();
 			checkExpo();	
 		}
 	}
@@ -193,11 +200,15 @@ void GameController::calculateScore()
 	//m_player.addScore(points);
 }
 
-void GameController::resetGuardPos()
+void GameController::resetLevel()
 {
-	for (size_t index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
+	for (int index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
 	{
 		m_movingObj[index]->setPosition(m_movingObj[index]->getStartingPosition());
+	}
+	for (int index = Guard::getNumOfGuardsAlive(); index < m_movingObj.size(); ++index)
+	{
+		m_movingObj[index]->setLife(true);
 	}
 }
 
@@ -240,13 +251,19 @@ void GameController::checkExpo()
 
 			}
 		}
-
-		//if (m_movingObj[explosion]->checkCollision(m_player))
-		//{
-		//	m_movingObj[explosion]->collide(m_player);
-		//	//resetGuardPos();
-		//	break;
-		//}
+		for (const auto& staticObj : m_staticObj)
+		{
+			if (m_movingObj[explosion]->checkCollision(*staticObj))
+			{
+				m_movingObj[explosion]->collide(*staticObj);
+			}
+		}
+		if (m_movingObj[explosion]->checkCollision(m_player))
+		{
+			m_movingObj[explosion]->collide(m_player);
+			resetLevel();
+			break;
+		}
 	}
 }
 
@@ -259,8 +276,7 @@ void GameController::checkVaildDraw()
 		{
 			if (m_movingObj[explosion]->checkCollision(*staticObj))
 			{
-				std::cout << "in check valud draw" << std::endl;
-				staticObj->collide(*m_movingObj[explosion]);
+				m_movingObj[explosion]->collide(*staticObj);
 			}
 		}
 	}

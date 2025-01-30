@@ -10,7 +10,6 @@ public:
 	virtual void collide(GameObject& otherObject) override;
 	virtual void guardCollide(Guard& otherObject) override;
 	virtual void setDirection(sf::Vector2f position) override;
-	virtual void wallCollide(Wall& otherObject) override;
 	/*
 	virtual void doorCollide(Door& otherObject) override;
 	virtual void explosionCollide(Explosion& otherObject) override;

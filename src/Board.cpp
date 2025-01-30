@@ -20,7 +20,7 @@ int Board::loadLevel(const int& currStage)
 {
 	m_level.clear();
 	auto line = std::string();
-	std::string currFileName = std::string("Level") + std::to_string(1) + ".txt";
+	std::string currFileName = std::string("Level") + std::to_string(currStage) + ".txt";
 	std::ifstream file(currFileName);
 
 	if (!file)

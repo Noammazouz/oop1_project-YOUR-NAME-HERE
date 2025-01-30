@@ -85,7 +85,3 @@ void GameObject::playerCollide(Player& /*otherObject*/)
 void  GameObject::explosionCollide(Explosion& /*otherobject*/)
 {
 }
-
-void  GameObject::wallCollide(Wall& /*otherObject*/)
-{
-}
