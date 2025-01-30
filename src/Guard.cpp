@@ -5,18 +5,16 @@
 Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
-    //this->setID(GUARD);
 	m_num_of_guards++;
 	m_num_of_guards_alive++;
 }
-
-
+//-------------------------------------
 void Guard::update(sf::Time deltaTime)
 {
     this->setPrevLocation(this->getPosition());
     this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
 }
-
+//-------------------------------------
 void Guard::setDirection(sf::Vector2f position)
 {
     float xDistance = this->getPosition().x - position.x;
@@ -45,45 +43,51 @@ void Guard::setDirection(sf::Vector2f position)
         }
     }
 }
-
+//-------------------------------------
 void Guard::collide(GameObject& otherObject)
 {
     otherObject.guardCollide(*this);
 }
-
+//-------------------------------------
 void Guard::guardCollide(Guard& otherObject)
 {
 	otherObject.setPosition(otherObject.getPrevLocation());
 }
-
+//-------------------------------------
 void Guard::explosionCollide(Explosion& otherobject)
 {
     this->setLife(true);
 }
+//-------------------------------------
 Guard::~Guard()
 {
 	m_num_of_guards_alive--;
 
 }
+//-------------------------------------
 void Guard::resetNumOfGuards()
 {
 	m_num_of_guards = 0;
 	m_num_of_guards_alive = 0;
 }
+//-------------------------------------
 int Guard::getNumOfStartingGuards()
 {
 	return m_num_of_guards;
 
 }
+//-------------------------------------
 int Guard::getNumOfGuardsAlive()
 {
 	return m_num_of_guards_alive;
 }
-
+//-------------------------------------
 void Guard::playerCollide(Player& otherObject)
 {
 	otherObject.setPosition(otherObject.getStartingPosition());
 	otherObject.decLife();
 }
+//-------------------------------------
 int Guard::m_num_of_guards_alive = 0;
+//-------------------------------------
 int Guard::m_num_of_guards = 0;

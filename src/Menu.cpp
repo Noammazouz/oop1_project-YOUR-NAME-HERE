@@ -31,7 +31,7 @@ void Menu::draw()
 		}
 	}
 }
-
+//-------------------------------------
 void Menu::drawWindow(sf::RenderWindow& window)
 {
 	m_buttons.clear();
@@ -63,7 +63,7 @@ void Menu::drawWindow(sf::RenderWindow& window)
 
 	window.display();
 }
-
+//-------------------------------------
 void Menu::handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseButtonEvent& event)
 {
 	for (int boutton = 0; boutton < NUM_OF_BUTTON; boutton++)
@@ -100,7 +100,7 @@ void Menu::handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseBut
 		}
 	}
 }
-
+//-------------------------------------
 void Menu::drawHelp(sf::RenderWindow& window)
 {
 	sf::Sprite help_explation;

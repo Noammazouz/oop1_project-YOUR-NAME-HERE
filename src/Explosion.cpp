@@ -5,7 +5,7 @@ Explosion::Explosion(sf::Vector2f position, const sf::Texture& texture)
 	: UpdateableObject(sf::Vector2f(position.x - BOMB_WIDTH / 2, position.y - BOMB_WIDTH / 2), texture, BOMB_WIDTH, BOMB_HEIGHT), m_explosion(texture), m_timeToLive(sf::seconds(0.5))
 {
 }
-
+//-------------------------------------
 void Explosion::update(sf::Time deltaTime)
 {
 	m_timeToLive -= deltaTime;
@@ -14,16 +14,16 @@ void Explosion::update(sf::Time deltaTime)
 		this->setLife(true);
 	}
 }
-
+//-------------------------------------
 void Explosion::collide(GameObject& otherObject)
 {
 	otherObject.explosionCollide(*this);
 }
-
+//-------------------------------------
 void Explosion::guardCollide(Guard& /*otherObject*/)
 {
 }
-
+//-------------------------------------
 void Explosion::setDirection(sf::Vector2f position)
 {
 	this->updatePosition(position);

@@ -1,15 +1,15 @@
 #include "Player.h"
 #include <iostream>
 
-//int Player::m_score = 0;
 Player::Player()
 {
 }
-
+//-------------------------------------
 Player::Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
 	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
 {
 }
+//-------------------------------------
 void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 {
 	switch (key)
@@ -33,51 +33,47 @@ void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 		break;
 	}
 }
-
+//-------------------------------------
 void Player::update(sf::Time deltaTime)
 {
 	this->setPrevLocation(this->getPosition());
 	this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
 }
-
+//-------------------------------------
 void Player::setDirection(sf::Vector2f position)
 {}
-
+//-------------------------------------
 void Player::collide(GameObject& otherObject)
 {
 	otherObject.playerCollide(*this);
 }
-
+//-------------------------------------
 void Player::guardCollide(Guard& /*otherObject*/)
 {
 }
-
+//-------------------------------------
 void Player::explosionCollide(Explosion& otherobject)
 {
 	this->setPosition(this->getStartingPosition());
 	decLife();
 }
-
+//-------------------------------------
 void Player::decLife()
 {
 	m_lives--;
 }
-
+//-------------------------------------
 int Player::getLife() const
 {
 	return m_lives;
 }
-
+//-------------------------------------
 void Player::setWin(bool win)
 {
 	m_win = win;
 }
-
+//-------------------------------------
 bool Player::getWin() const
 {
 	return m_win;
 }
-//void Player::addScore(int score)
-//{
-//	m_score += score;
-//}

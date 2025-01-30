@@ -14,7 +14,6 @@
 Board::Board()
 	: m_rows(0), m_cols(0)
 {}
-
 //-----------------------
 int Board::loadLevel(const int& currStage)
 {

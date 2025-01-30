@@ -5,18 +5,21 @@ ResourcesManager::ResourcesManager()
 { 
 	loadTexture(); 
 }
+//-------------------------------------
 ResourcesManager::~ResourcesManager() 
-{ 
-	//cout << "d-tor" << endl; 
+{  
 }
+//-------------------------------------
 ResourcesManager& ResourcesManager::getInstance() 
 {
 	static ResourcesManager inst;
 	return inst;
 }
-void ResourcesManager::show() const {
-	//cout << m_data << endl;
+//-------------------------------------
+void ResourcesManager::show() const 
+{
 }
+//-------------------------------------
 void ResourcesManager::loadTexture()
 {
     std::vector<std::pair<std::string, std::string>> textures = 
@@ -58,6 +61,7 @@ void ResourcesManager::loadTexture()
 
     }
 }
+//-------------------------------------
 const sf::Texture& ResourcesManager::getTexture(std::string name)
 {
     auto it = m_textures.find(name);

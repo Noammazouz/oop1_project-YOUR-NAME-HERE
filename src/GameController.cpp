@@ -4,9 +4,7 @@
 GameController::GameController()
 	: m_level(1), m_window(sf::VideoMode(WIDTH, HEIGHT), "level")
 {}
-
-
-
+//-------------------------------------
 void GameController::newGame()
 {
 	m_menu.draw();
@@ -46,7 +44,7 @@ void GameController::runLevel()
 				{
 					if (event.key.code == sf::Keyboard::Escape)
 					{
-						m_window.close();
+						newGame();
 					}
 					if (event.key.code == sf::Keyboard::B)
 					{
@@ -80,7 +78,7 @@ void GameController::runLevel()
 		//to do leader board
 	}
 }
-
+//-------------------------------------
 void  GameController::drawWindow()
 {
 	ResourcesManager& resources = ResourcesManager::getInstance();
@@ -102,6 +100,7 @@ void  GameController::drawWindow()
 
 	m_player.draw(m_window);
 }
+//-------------------------------------
 void GameController::move(sf::Clock& clock, sf::Time& timer)
 {
 	const auto deltaTime = clock.restart();
@@ -119,7 +118,7 @@ void GameController::move(sf::Clock& clock, sf::Time& timer)
 	}
 	timer -= deltaTime;
 }
-
+//-------------------------------------
 void GameController::handleCollision()
 {
 	for (const auto& staticObj : m_staticObj)
@@ -140,6 +139,7 @@ void GameController::handleCollision()
 			}
 		}
 	}
+
 	for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); ++guard)
 	{
 		if (m_player.checkCollision(*m_movingObj[guard]))
@@ -161,12 +161,12 @@ void GameController::handleCollision()
 		}
 	}
 }
-
+//-------------------------------------
 void GameController::setbomb()
 {
 	m_movingObj.push_back(std::make_unique<Bombs>(sf::Vector2f(m_player.getPosition()), ResourcesManager::getInstance().getTexture("bomb")));
 }
-
+//-------------------------------------
 void GameController::handleErasing()
 {
 	std::erase_if(m_movingObj, [](const auto& item)
@@ -175,7 +175,7 @@ void GameController::handleErasing()
 	std::erase_if(m_staticObj, [](const auto& item)
 		{return item->isDead(); });
 }
-
+//-------------------------------------
 void GameController::explosion()
 {
 	auto bomb = Guard::getNumOfGuardsAlive();
@@ -191,6 +191,7 @@ void GameController::explosion()
 		}
 	}
 }
+//-------------------------------------
 void GameController::calculateScore()
 {
 	int points = 0;
@@ -199,7 +200,7 @@ void GameController::calculateScore()
 	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
 	//m_player.addScore(points);
 }
-
+//-------------------------------------
 void GameController::resetLevel()
 {
 	for (int index = 0; index < Guard::getNumOfGuardsAlive(); ++index)
@@ -211,7 +212,7 @@ void GameController::resetLevel()
 		m_movingObj[index]->setLife(true);
 	}
 }
-
+//-------------------------------------
 void GameController::setExpoDirection(int index)
 {
 	for (int direction = 0; direction < NUM_OF_DIRECTION; direction++)
@@ -238,6 +239,7 @@ void GameController::setExpoDirection(int index)
 	}
 	m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
 }
+//-------------------------------------
 void GameController::checkExpo()
 {
 	auto explosion = m_movingObj.size() - NUM_OF_EXPLOSION;
@@ -266,7 +268,7 @@ void GameController::checkExpo()
 		}
 	}
 }
-
+//-------------------------------------
 void GameController::checkVaildDraw()
 {
 	auto explosion = m_movingObj.size() - NUM_OF_EXPLOSION;
