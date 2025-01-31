@@ -60,7 +60,7 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 				m_staticObj.push_back(std::make_unique<Door>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("door"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '/': // Player
-                 m_player = Player(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT);
+                 m_player = Player(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("player"), CELL_WIDTH, CELL_HEIGHT / 1.25);
 				
 				break;
 			case '#': // Wall
@@ -70,7 +70,7 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 				m_staticObj.push_back(std::make_unique<Rock>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("rock"), CELL_WIDTH, CELL_HEIGHT));
 				break;
 			case '!': // Guard
-				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("guard"), CELL_WIDTH, CELL_HEIGHT));
+				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("guard"), CELL_WIDTH, CELL_HEIGHT / 1.05f));
 				break;
 			case '+': // add time
 				break;
