@@ -83,9 +83,8 @@ void GameController::runLevel()
 			m_level++;
 			calculateScore();
 			handleLoadingLevel(timer, clock);
-			//runLevel();
 		}
-		if (m_player.getLife() == END_GAME)
+		if (m_player.getLife() == END_GAME || timer.asSeconds() <= 0.f)
 		{
 			// to do a Lost board
 			m_window.close();
