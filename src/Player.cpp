@@ -1,6 +1,8 @@
 #include "Player.h"
 #include <iostream>
 
+
+int Player::m_lives = NUM_OF_LIVES;
 Player::Player()
 {
 }
@@ -63,7 +65,7 @@ void Player::decLife()
 	m_lives--;
 }
 //-------------------------------------
-int Player::getLife() const
+int Player::getLife()
 {
 	return m_lives;
 }

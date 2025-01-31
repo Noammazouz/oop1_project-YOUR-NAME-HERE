@@ -20,13 +20,25 @@ void Menu::draw()
 		{
 			switch (event.type)
 			{
-			case sf::Event::Closed:
-				window.close();
-				exit(EXIT_SUCCESS);
-				break;
-			case sf::Event::MouseButtonReleased:
-				handleMouseEvents(window, event.mouseButton);
-				break;
+				case sf::Event::Closed:
+				{
+					window.close();
+					exit(EXIT_SUCCESS);
+					break;
+				}
+				case sf::Event::MouseButtonReleased:
+				{
+					handleMouseEvents(window, event.mouseButton);
+					break;
+				}
+				case sf::Event::KeyPressed:
+				{
+					if (event.key.code == sf::Keyboard::M)
+					{
+						handleMuting();
+					}
+					break;
+				}
 			}
 		}
 	}
@@ -110,4 +122,16 @@ void Menu::drawHelp(sf::RenderWindow& window)
 	window.draw(m_buttons[m_buttons.size() - 1]);
 	window.display();
 	m_help_window = true;
+}
+//----------------------
+void Menu::handleMuting()
+{
+	if (ResourcesManager::getInstance().getMusic("menu").getStatus() == sf::Music::Playing)
+	{
+		ResourcesManager::getInstance().getMusic("menu").pause();
+	}
+	else
+	{
+		ResourcesManager::getInstance().getMusic("menu").play();
+	}
 }

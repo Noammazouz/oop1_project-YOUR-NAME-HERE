@@ -15,4 +15,5 @@ private:
 	void drawWindow(sf::RenderWindow& window);
 	void handleMouseEvents(sf::RenderWindow& window, const sf::Event::MouseButtonEvent& event);
 	void drawHelp(sf::RenderWindow& window);
+	void handleMuting();
 };

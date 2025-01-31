@@ -18,10 +18,10 @@ public:
 	void setWin(bool win);
 	bool getWin() const;
 	void decLife();
-	int getLife() const;
+	static int getLife();
 	~Player() = default ;
 private:
 	sf::Vector2f m_direction;
-	int m_lives = NUM_OF_LIVES;
+	static int m_lives;
 	bool m_win = false;
 };

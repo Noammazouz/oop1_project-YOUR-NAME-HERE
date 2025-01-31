@@ -1,4 +1,5 @@
 #pragma once
+#include "ResourcesManager.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -7,13 +8,13 @@ class Scoreboard
 {
 public:
 	Scoreboard();
-	void updateLives(int numberOfLives, sf::Font* newFont);
+	void updateLives(int numberOfLives);
 	sf::Text getLives() const;
-	void updateScore(int Score, sf::Font* newFont);
+	void updateScore(int Score);
 	sf::Text getScore() const;
-	void updateLevel(int numberOfLevel, sf::Font* newFont);
+	void updateLevel(int numberOfLevel);
 	sf::Text getLevel() const;
-	void updateTime(sf::Clock Timer, sf::Font* newFont, float addedTime);
+	void updateTime(sf::Time Timer, float addedTime);
 	sf::Text getTime() const;
 
 private:

@@ -3,10 +3,13 @@
 
 GameController::GameController()
 	: m_level(1), m_window(sf::VideoMode(WIDTH, HEIGHT), "level")
-{}
+{
+	//initializeMusic();
+}
 //-------------------------------------
 void GameController::newGame()
 {
+	handleMusicTransition(false);
 	m_menu.draw();
 	runLevel();
 }
@@ -14,18 +17,20 @@ void GameController::newGame()
 void GameController::runLevel()
 {
 	//auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	m_movingObj.clear();
-	m_staticObj.clear();
-	if (m_board.loadLevel(m_level) == END_GAME)
-	{
-		//make the end game
-	}
-	Guard::resetNumOfGuards();
-	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
-
-	sf::Time timer = sf::seconds(120);
+	//m_movingObj.clear();
+	//m_staticObj.clear();
+	//if (m_board.loadLevel(m_level) == END_GAME)
+	//{
+	//	//make the end game
+	//}
+	//Guard::resetNumOfGuards();
+	//m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+	handleMusicTransition(true);
+	m_scoreboard.updateScore(0);
+	sf::Time timer;
 	sf::Clock clock;
-	
+	handleLoadingLevel(timer, clock);
+
 	while (m_window.isOpen())
 	{
 		m_window.clear();
@@ -50,6 +55,10 @@ void GameController::runLevel()
 					{
 						setbomb();
 					}
+					if (event.key.code == sf::Keyboard::M)
+					{
+						handleMuting();
+					}
 					else
 					{
 						m_player.setDirectionFromKeyboard(event.key.code);
@@ -68,14 +77,20 @@ void GameController::runLevel()
 		handleCollision();
 		explosion();
 		handleErasing();
+		handleSocreboard(timer);
 		if (m_player.getWin())
 		{
 			m_level++;
 			calculateScore();
-			runLevel();
+			handleLoadingLevel(timer, clock);
+			//runLevel();
 		}
-		//to reset game and to dec player life
-		//to do leader board
+		if (m_player.getLife() == END_GAME)
+		{
+			// to do a Lost board
+			m_window.close();
+			break;
+		}
 	}
 }
 //-------------------------------------
@@ -99,6 +114,10 @@ void  GameController::drawWindow()
 	}
 
 	m_player.draw(m_window);
+	m_window.draw(m_scoreboard.getLevel());
+	m_window.draw(m_scoreboard.getScore());
+	m_window.draw(m_scoreboard.getTime());
+	m_window.draw(m_scoreboard.getLives());
 }
 //-------------------------------------
 void GameController::move(sf::Clock& clock, sf::Time& timer)
@@ -198,7 +217,7 @@ void GameController::calculateScore()
 	points += ENDING_LEVEL;
 	points += (Guard::getNumOfStartingGuards() * POINT_FOR_GUARD);
 	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
-	//m_player.addScore(points);
+	m_scoreboard.updateScore(points);
 }
 //-------------------------------------
 void GameController::resetLevel()
@@ -283,4 +302,61 @@ void GameController::checkVaildDraw()
 		}
 	}
 	handleErasing();
+}
+//---------------------------------
+void GameController::handleLoadingLevel(sf::Time& timer, sf::Clock& clock)
+{
+	m_movingObj.clear();
+	m_staticObj.clear();
+	if (m_board.loadLevel(m_level) == END_GAME)
+	{
+		//make the end game
+	}
+	Guard::resetNumOfGuards();
+	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+
+	timer = sf::seconds(120);
+	clock.restart();
+}
+//-----------------------------
+void GameController::handleMusicTransition(bool toGameplay)
+{
+	if (toGameplay && !m_inGameplay)
+	{
+		ResourcesManager::getInstance().getMusic("menu").stop();
+		if (ResourcesManager::getInstance().getMusic("game").getStatus() != sf::Music::Playing)
+		{
+			ResourcesManager::getInstance().getMusic("game").play();
+		}
+		m_inGameplay = true;
+	}
+	else if (!toGameplay && m_inGameplay)
+	{
+		ResourcesManager::getInstance().getMusic("game").stop();
+		ResourcesManager::getInstance().getMusic("menu").play();
+		m_inGameplay = false;
+	}
+	else
+	{
+		ResourcesManager::getInstance().getMusic("menu").play();
+	}
+}
+//-------------------------------------
+void GameController::handleMuting()
+{
+	if (ResourcesManager::getInstance().getMusic("game").getStatus() == sf::Music::Playing)
+	{
+		ResourcesManager::getInstance().getMusic("game").pause();
+	}
+	else
+	{
+		ResourcesManager::getInstance().getMusic("game").play();
+	}
+}
+//---------------------------------
+void GameController::handleSocreboard(const sf::Time& timer)
+{
+	m_scoreboard.updateTime(timer, 0);
+	m_scoreboard.updateLevel(m_level);
+	m_scoreboard.updateLives(m_player.getLife());
 }
