@@ -42,9 +42,9 @@ void ResourcesManager::loadTexture()
         {"bomb", "bomb.png"},
 		{"freeze", "freeze.png"},
 		{"explosion", "Explosion.png"},
-		{"add time", "add_time.png"}
-		//{"scoreboard", "scoreboard.png"},
-		//{"score", "score.png"},
+		{"add time", "add_time.png"},
+		{"add life", "m_medkit.png"},
+		{"kill guard", "o_water.png"}
 		//{"time", "time.png"},
 		//{"game over", "game over.png"},
         //{"win", "win.png"}
