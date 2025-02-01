@@ -45,7 +45,6 @@ void ResourcesManager::loadTexture()
 		{"add time", "add_time.png"},
 		{"add life", "m_medkit.png"},
 		{"kill guard", "o_water.png"}
-		//{"time", "time.png"},
 		//{"game over", "game over.png"},
         //{"win", "win.png"}
     };

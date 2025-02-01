@@ -52,9 +52,8 @@ sf::Text Scoreboard::getLevel() const
 	return m_Level;
 }
 
-void Scoreboard::updateTime(sf::Time Timer, float addedTime)
+void Scoreboard::updateTime(sf::Time Timer)
 {
-	//sf::Time deltaTime = sf::seconds((float)2 * 60 - Timer.getElapsedTime().asSeconds() + addedTime);
 	int minutes = Timer.asSeconds() / 60,
 		seconds = int(Timer.asSeconds()) % 60;
 

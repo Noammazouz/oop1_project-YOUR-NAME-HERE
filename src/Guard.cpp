@@ -3,7 +3,7 @@
 #include "Player.h"
 
 Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
-	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
+	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT), m_freezeTime(sf::seconds(3))
 {
 	m_num_of_guards++;
 	m_num_of_guards_alive++;
@@ -12,7 +12,15 @@ Guard::Guard(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH
 void Guard::update(sf::Time deltaTime)
 {
     this->setPrevLocation(this->getPosition());
-    this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
+    if (!m_freeze)
+    {
+        this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
+    }
+    else
+    {
+		m_freezeTime -= deltaTime;
+        checktimer();
+    }
 }
 //-------------------------------------
 void Guard::setDirection(sf::Vector2f position)
@@ -42,6 +50,11 @@ void Guard::setDirection(sf::Vector2f position)
 			m_direction = sf::Vector2f(1, 0); //right
         }
     }
+}
+//-------------------------------------
+void Guard::setFreezing(bool freeze)
+{
+	m_freeze = freeze;
 }
 //-------------------------------------
 void Guard::collide(GameObject& otherObject)
@@ -91,3 +104,12 @@ void Guard::playerCollide(Player& otherObject)
 int Guard::m_num_of_guards_alive = 0;
 //-------------------------------------
 int Guard::m_num_of_guards = 0;
+//-------------------------------------
+void Guard::checktimer()
+{
+    if (m_freezeTime.asSeconds() <= 0.f)
+    {
+		m_freeze = false;
+        m_freezeTime = sf::seconds(3);
+    }
+}

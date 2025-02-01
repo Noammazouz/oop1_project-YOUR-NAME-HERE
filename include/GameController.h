@@ -26,7 +26,7 @@ private:
 
 	void runLevel();
 	void drawWindow();
-	void move(sf::Clock& clock, sf::Time& timer);
+	void move(sf::Clock& clock);
 	void handleCollision();
 	void setbomb();
 	void handleErasing();
@@ -36,15 +36,17 @@ private:
 	void resetLevel();
 	void checkExpo();
 	void checkVaildDraw();
-	void handleLoadingLevel(sf::Time& timer, sf::Clock& clock);
+	void handleLoadingLevel(sf::Clock& clock);
 	void handleMusicTransition(bool toGameplay);
 	void handleMuting();
-	void handleSocreboard(const sf::Time& timer);
-	//to make the freezing guard
-	//to make the removing guard
-	// to make the add time for game
-	sf::RenderWindow m_window;
+	void handleSocreboard();
+	void handlePresents();
+	void freezeGuard();
+	void removeGuard();
+	void addTime();
 
+	sf::RenderWindow m_window;
+	sf::Time m_timer;
 	Board m_board;
 	Player m_player;
 	Menu m_menu;

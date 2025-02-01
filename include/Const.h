@@ -20,6 +20,7 @@ const float BOMB_WIDTH = 32.f;
 const float BOMB_HEIGHT = 32.f;
 const float BOMB_TIME = 4.f;
 const int NUM_OF_EXPLOSION = 5;
+const float ADDED_TIME = 10.f;
 
 enum Direction 
 {
@@ -35,4 +36,12 @@ enum menuButtons
 	HELP,
 	EXIT,
 	BACK
+};
+
+enum Present
+{
+	TIME,
+	KILL,
+	FREEZE,
+	DEFAULT
 };

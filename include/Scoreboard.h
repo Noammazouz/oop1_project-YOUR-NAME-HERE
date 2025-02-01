@@ -14,7 +14,7 @@ public:
 	sf::Text getScore() const;
 	void updateLevel(int numberOfLevel);
 	sf::Text getLevel() const;
-	void updateTime(sf::Time Timer, float addedTime);
+	void updateTime(sf::Time Timer);
 	sf::Text getTime() const;
 
 private:

@@ -2,7 +2,7 @@
 
 
 GameController::GameController()
-	: m_level(1), m_window(sf::VideoMode(WIDTH, HEIGHT), "level")
+	: m_level(1), m_timer(sf::seconds(0))
 {
 	//initializeMusic();
 }
@@ -16,20 +16,12 @@ void GameController::newGame()
 //---------
 void GameController::runLevel()
 {
-	//auto window = sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "level");
-	//m_movingObj.clear();
-	//m_staticObj.clear();
-	//if (m_board.loadLevel(m_level) == END_GAME)
-	//{
-	//	//make the end game
-	//}
-	//Guard::resetNumOfGuards();
-	//m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
+	m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
 	handleMusicTransition(true);
 	m_scoreboard.updateScore(0);
-	sf::Time timer;
+
 	sf::Clock clock;
-	handleLoadingLevel(timer, clock);
+	handleLoadingLevel(clock);
 
 	while (m_window.isOpen())
 	{
@@ -49,6 +41,7 @@ void GameController::runLevel()
 				{
 					if (event.key.code == sf::Keyboard::Escape)
 					{
+						m_window.close();
 						newGame();
 					}
 					if (event.key.code == sf::Keyboard::B)
@@ -73,18 +66,18 @@ void GameController::runLevel()
 			}
 		}
 		
-		move(clock, timer);
+		move(clock);
 		handleCollision();
 		explosion();
 		handleErasing();
-		handleSocreboard(timer);
+		handleSocreboard();
 		if (m_player.getWin())
 		{
 			m_level++;
 			calculateScore();
-			handleLoadingLevel(timer, clock);
+			handleLoadingLevel(clock);
 		}
-		if (m_player.getLife() == END_GAME || timer.asSeconds() <= 0.f)
+		if (m_player.getLife() == END_GAME || m_timer.asSeconds() <= 0.f)
 		{
 			// to do a Lost board
 			m_window.close();
@@ -119,7 +112,7 @@ void  GameController::drawWindow()
 	m_window.draw(m_scoreboard.getLives());
 }
 //-------------------------------------
-void GameController::move(sf::Clock& clock, sf::Time& timer)
+void GameController::move(sf::Clock& clock)
 {
 	const auto deltaTime = clock.restart();
 
@@ -134,7 +127,7 @@ void GameController::move(sf::Clock& clock, sf::Time& timer)
 		movingObj->update(deltaTime);
 		index++;
 	}
-	timer -= deltaTime;
+	m_timer -= deltaTime;
 }
 //-------------------------------------
 void GameController::handleCollision()
@@ -146,6 +139,8 @@ void GameController::handleCollision()
 			m_player.collide(*staticObj);
 		}
 	}
+
+	handlePresents();
 
 	for (const auto& movingObj : m_movingObj)
 	{
@@ -303,7 +298,7 @@ void GameController::checkVaildDraw()
 	handleErasing();
 }
 //---------------------------------
-void GameController::handleLoadingLevel(sf::Time& timer, sf::Clock& clock)
+void GameController::handleLoadingLevel(sf::Clock& clock)
 {
 	m_movingObj.clear();
 	m_staticObj.clear();
@@ -314,7 +309,7 @@ void GameController::handleLoadingLevel(sf::Time& timer, sf::Clock& clock)
 	Guard::resetNumOfGuards();
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
 
-	timer = sf::seconds(120);
+	m_timer = sf::seconds(120);
 	clock.restart();
 }
 //-----------------------------
@@ -353,9 +348,56 @@ void GameController::handleMuting()
 	}
 }
 //---------------------------------
-void GameController::handleSocreboard(const sf::Time& timer)
+void GameController::handleSocreboard()
 {
-	m_scoreboard.updateTime(timer, 0);
+	m_scoreboard.updateTime(m_timer);
 	m_scoreboard.updateLevel(m_level);
 	m_scoreboard.updateLives(m_player.getLife());
+}
+void GameController::handlePresents()
+{
+	switch (m_player.getPresent())
+	{
+		case TIME:
+		{
+			addTime();
+			break;
+		}
+		case KILL:
+		{
+			removeGuard();
+			break;
+
+		}
+		case FREEZE:
+		{
+			freezeGuard();
+			break;
+		}
+	}
+	m_player.setPresent(DEFAULT);
+}
+//--------------------
+void GameController::freezeGuard()
+{
+	for (int guard = 0; guard < Guard::getNumOfGuardsAlive(); guard++)
+	{
+		m_movingObj[guard]->setFreezing(true);
+	}
+}
+//------------------------
+void GameController::removeGuard()
+{
+	if (Guard::getNumOfGuardsAlive() != 0)
+	{
+		srand(time(NULL));
+		int index = rand() % Guard::getNumOfGuardsAlive();
+		m_movingObj[index]->setLife(true);
+	}
+}
+//------------------------
+void GameController::addTime()
+{
+	m_timer += sf::seconds(ADDED_TIME);
+	m_scoreboard.updateTime(m_timer);
 }

@@ -8,7 +8,7 @@ Player::Player()
 }
 //-------------------------------------
 Player::Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT)
-	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT)
+	: UpdateableObject(position, texture, CELL_WIDTH, CELL_HEIGHT), m_present(DEFAULT)
 {
 }
 //-------------------------------------
@@ -78,4 +78,19 @@ void Player::setWin(bool win)
 bool Player::getWin() const
 {
 	return m_win;
+}
+//-----------------------------
+const Present& Player::getPresent() const
+{
+	return m_present;
+}
+//-------------------------------
+void Player::setPresent(Present present)
+{
+	m_present = present;
+}
+//-------------------------------------
+void Player::incLife()
+{
+	m_lives++;
 }
