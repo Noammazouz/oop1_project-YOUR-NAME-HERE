@@ -45,6 +45,7 @@ private:
 	void removeGuard();
 	void addTime();
 	void lostWindow();
+	void winWindow();
 
 	sf::RenderWindow m_window;
 	sf::Time m_timer;

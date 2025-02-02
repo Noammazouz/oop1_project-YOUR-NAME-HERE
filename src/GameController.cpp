@@ -4,7 +4,6 @@
 GameController::GameController()
 	: m_level(1), m_timer(sf::seconds(0))
 {
-	//initializeMusic();
 }
 //-------------------------------------
 void GameController::newGame()
@@ -77,10 +76,15 @@ void GameController::runLevel()
 			calculateScore();
 			handleLoadingLevel(clock);
 		}
-		if (m_player.getLife() == END_GAME || m_timer.asSeconds() <= 0.f)
+		if (m_player.getLife() == END_GAME)
 		{
 			lostWindow();
 			break;
+		}
+		else if (m_timer.asSeconds() <= 0.f)
+		{
+			m_player.decLife();
+			handleLoadingLevel(clock);
 		}
 	}
 }
@@ -303,7 +307,7 @@ void GameController::handleLoadingLevel(sf::Clock& clock)
 	m_staticObj.clear();
 	if (m_board.loadLevel(m_level) == END_GAME)
 	{
-		//make the end game
+		winWindow();
 	}
 	Guard::resetNumOfGuards();
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
@@ -407,6 +411,20 @@ void GameController::lostWindow()
 	// to do a Lost board
 	ResourcesManager::getInstance().getMusic("game").stop();
 	m_sound.setBuffer(ResourcesManager::getInstance().getSound("loss"));
+	m_sound.setVolume(100.f);
+	//m_sound.setLoop(true);
+	m_sound.play();
+	//m_window.close();
+	//m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
+	//m_menu.draw();
+	//while (1);
+}
+//------------------------
+void GameController::winWindow()
+{
+	// to do a win board
+	ResourcesManager::getInstance().getMusic("game").stop();
+	m_sound.setBuffer(ResourcesManager::getInstance().getSound("win"));
 	//m_sound.setVolume(100.f);
 	//m_sound.setLoop(true);
 	m_sound.play();
