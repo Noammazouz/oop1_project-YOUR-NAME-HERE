@@ -47,6 +47,9 @@ private:
 	void lostWindow();
 	void winWindow();
 	void hadndlePlayerDirection();
+	void handleKeyPressed(sf::Event::KeyEvent event);
+	bool checkDeriction();
+
 
 	sf::RenderWindow m_window;
 	sf::Time m_timer;

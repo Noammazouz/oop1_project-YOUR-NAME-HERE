@@ -40,19 +40,8 @@ void GameController::runLevel()
 					break;
 				case sf::Event::KeyPressed:
 				{
-					if (event.key.code == sf::Keyboard::Escape)
-					{
-						m_window.close();
-						newGame();
-					}
-					if (event.key.code == sf::Keyboard::B)
-					{
-						setbomb();
-					}
-					if (event.key.code == sf::Keyboard::M)
-					{
-						handleMuting();
-					}
+					handleKeyPressed(event.key);
+					
 					/*else
 					{
 						m_player.setDirectionFromKeyboard(event.key.code);
@@ -459,10 +448,10 @@ void GameController::winWindow()
 void GameController::hadndlePlayerDirection()
 {
 	// Handle continuous movement - add this before event handling
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+	if (checkDeriction())/*sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Down))*/
 	{
 		// Get the current key being pressed and update movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -479,4 +468,29 @@ void GameController::hadndlePlayerDirection()
 		// If no movement keys are pressed, stop the player
 		m_player.setDirectionFromKeyboard(sf::Keyboard::Space); // Or whatever key you use to stop
 	}
+}
+//---------------------------------
+void GameController::handleKeyPressed(sf::Event::KeyEvent event)
+{
+	if (event.code == sf::Keyboard::Escape)
+	{
+		m_window.close();
+		newGame();
+	}
+	if (event.code == sf::Keyboard::B)
+	{
+		setbomb();
+	}
+	if (event.code == sf::Keyboard::M)
+	{
+		handleMuting();
+	}
+}
+//---------------------------------
+bool GameController::checkDeriction()
+{
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 }

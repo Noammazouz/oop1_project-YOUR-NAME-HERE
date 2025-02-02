@@ -43,7 +43,7 @@ void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
 void Player::update(sf::Time deltaTime)
 {
 	this->setPrevLocation(this->getPosition());
-	this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
+	this->updatePosition(m_direction * PLAYER_SPEED * deltaTime.asSeconds());
 }
 //-------------------------------------
 void Player::setDirection(sf::Vector2f /*position*/)

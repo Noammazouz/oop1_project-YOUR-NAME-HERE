@@ -14,7 +14,7 @@ void Guard::update(sf::Time deltaTime)
     this->setPrevLocation(this->getPosition());
     if (!m_freeze)
     {
-        this->updatePosition(m_direction * SPEED / 2.f * deltaTime.asSeconds());
+        this->updatePosition(m_direction * GUARD_SPEED * deltaTime.asSeconds());
     }
     else
     {
