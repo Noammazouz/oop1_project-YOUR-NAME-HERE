@@ -10,6 +10,15 @@ ResourcesManager::ResourcesManager()
 //-------------------------------------
 ResourcesManager::~ResourcesManager() 
 {  
+    //// Stop any playing music before cleanup
+    //m_menuMusic.stop();
+    //m_gameMusic.stop();
+
+    //// Clear sound buffers
+    //m_music.clear();
+
+    //// Clear textures
+    //m_textures.clear();
 }
 //-------------------------------------
 ResourcesManager& ResourcesManager::getInstance() 
@@ -92,6 +101,7 @@ void ResourcesManager::initializeMusic()
     std::vector<std::pair<std::string, std::string>> music =
     {
         //{"hit", "hit.ogg"},
+		{"door", "door_sound.ogg"},
         {"loss", "loss.ogg"},
         {"win", "win.ogg"}
     };

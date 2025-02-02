@@ -19,7 +19,7 @@ void AddingTime::playerCollide(Player& otherObject)
 	this->setLife(true);
 }
 //-------------------------------------
-void AddingTime::explosionCollide(Explosion& otherobject)
+void AddingTime::explosionCollide(Explosion& /*otherobject*/)
 {
 	this->setLife(true);
 }

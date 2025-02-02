@@ -14,7 +14,7 @@ void Guard::update(sf::Time deltaTime)
     this->setPrevLocation(this->getPosition());
     if (!m_freeze)
     {
-        this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
+        this->updatePosition(m_direction * SPEED / 2.f * deltaTime.asSeconds());
     }
     else
     {
@@ -67,7 +67,7 @@ void Guard::guardCollide(Guard& otherObject)
 	otherObject.setPosition(otherObject.getPrevLocation());
 }
 //-------------------------------------
-void Guard::explosionCollide(Explosion& otherobject)
+void Guard::explosionCollide(Explosion& /*otherObject*/)
 {
     this->setLife(true);
 }

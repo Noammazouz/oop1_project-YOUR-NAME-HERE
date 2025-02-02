@@ -46,6 +46,7 @@ private:
 	void addTime();
 	void lostWindow();
 	void winWindow();
+	void hadndlePlayerDirection();
 
 	sf::RenderWindow m_window;
 	sf::Time m_timer;
@@ -57,6 +58,7 @@ private:
 
 	int m_level;
 	bool m_inGameplay = false;
+	bool m_win = false;
 	std::vector<std::unique_ptr<UpdateableObject>> m_movingObj;
 	std::vector<std::unique_ptr<StaticObject>> m_staticObj;
 };

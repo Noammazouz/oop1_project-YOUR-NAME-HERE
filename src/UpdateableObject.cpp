@@ -44,6 +44,6 @@ bool UpdateableObject::getExpo() const
 	return false;
 }
 //-------------------------
-void  UpdateableObject::setFreezing(bool freeze)
+void  UpdateableObject::setFreezing(bool /*freeze*/)
 {
 }

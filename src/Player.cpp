@@ -7,6 +7,7 @@ int Player::m_lives = NUM_OF_LIVES;
 int Player::m_score = 0;
 //---------------------------------
 Player::Player()
+	: UpdateableObject(), m_present(DEFAULT)
 {
 }
 //-------------------------------------
@@ -45,7 +46,7 @@ void Player::update(sf::Time deltaTime)
 	this->updatePosition(m_direction * SPEED * deltaTime.asSeconds());
 }
 //-------------------------------------
-void Player::setDirection(sf::Vector2f position)
+void Player::setDirection(sf::Vector2f /*position*/)
 {}
 //-------------------------------------
 void Player::collide(GameObject& otherObject)
@@ -57,7 +58,7 @@ void Player::guardCollide(Guard& /*otherObject*/)
 {
 }
 //-------------------------------------
-void Player::explosionCollide(Explosion& otherobject)
+void Player::explosionCollide(Explosion& /*otherobject*/)
 {
 	this->setPosition(this->getStartingPosition());
 	decLife();

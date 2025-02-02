@@ -18,7 +18,7 @@ void FreezingGuards::playerCollide(Player& otherObject)
 	this->setLife(true);
 }
 //-------------------------------------
-void FreezingGuards::explosionCollide(Explosion& otherobject)
+void FreezingGuards::explosionCollide(Explosion& /*otherobject*/)
 {
 	this->setLife(true);
 }

@@ -70,7 +70,7 @@ void Menu::drawWindow(sf::RenderWindow& window)
 	pic.setTexture(ResourcesManager::getInstance().getTexture("return"));
 	pic.setPosition(0, 0);
 	pic.setOrigin(0,0);
-	pic.setScale(static_cast<float>(0.3), (0.3));
+	pic.setScale(static_cast<float>((0.3)), static_cast<float>((0.3)));
 	m_buttons.push_back(pic);
 
 	window.display();

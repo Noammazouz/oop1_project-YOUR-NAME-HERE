@@ -19,7 +19,7 @@ void RemovingGuard::playerCollide(Player& otherObject)
 	this->setLife(true);
 }
 //-------------------------------------
-void RemovingGuard::explosionCollide(Explosion& otherobject)
+void RemovingGuard::explosionCollide(Explosion& /*otherobject*/)
 {
 	this->setLife(true);
 }

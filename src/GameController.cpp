@@ -29,6 +29,8 @@ void GameController::runLevel()
 		drawWindow();
 		m_window.display();
 
+		hadndlePlayerDirection();
+
 		for (auto event = sf::Event{}; m_window.pollEvent(event);)
 		{
 			switch (event.type)
@@ -51,17 +53,17 @@ void GameController::runLevel()
 					{
 						handleMuting();
 					}
-					else
+					/*else
 					{
 						m_player.setDirectionFromKeyboard(event.key.code);
-					}
+					}*/
 					break;
 				}
-				case sf::Event::KeyReleased:
+				/*case sf::Event::KeyReleased:
 				{
 					m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
 					break;
-				}
+				}*/
 			}
 		}
 		
@@ -72,9 +74,19 @@ void GameController::runLevel()
 		handleSocreboard();
 		if (m_player.getWin())
 		{
+			m_sound.setBuffer(ResourcesManager::getInstance().getSound("door"));
+			m_sound.setVolume(100.f);
+			m_sound.setPlayingOffset(sf::seconds(0.3f));
+			m_sound.play();
+		    sf::sleep(sf::seconds(0.5f));
 			m_level++;
 			calculateScore();
 			handleLoadingLevel(clock);
+			if (m_win)
+			{
+				winWindow();
+				break;
+			}
 		}
 		if (m_player.getLife() == END_GAME)
 		{
@@ -307,7 +319,10 @@ void GameController::handleLoadingLevel(sf::Clock& clock)
 	m_staticObj.clear();
 	if (m_board.loadLevel(m_level) == END_GAME)
 	{
-		winWindow();
+		m_win = true;
+		calculateScore();
+		m_scoreboard.updateScore(m_player.getScore());
+		return;
 	}
 	Guard::resetNumOfGuards();
 	m_board.LoadBoard(m_movingObj, m_staticObj, m_player);
@@ -419,7 +434,7 @@ void GameController::lostWindow()
 	m_window.clear();
 	m_window.draw(lostWindow);
 	m_window.display();
-	sf::sleep(sf::seconds(3));
+	sf::sleep(sf::seconds(2));
 	m_window.close();
 }
 //------------------------
@@ -435,7 +450,33 @@ void GameController::winWindow()
 	winWindow.setTexture(ResourcesManager::getInstance().getTexture("win"));
 	m_window.clear();
 	m_window.draw(winWindow);
+	m_window.draw(m_scoreboard.getScore());
 	m_window.display();
 	sf::sleep(sf::seconds(3));
 	m_window.close();
+}
+//-------------------------------
+void GameController::hadndlePlayerDirection()
+{
+	// Handle continuous movement - add this before event handling
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		// Get the current key being pressed and update movement
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			m_player.setDirectionFromKeyboard(sf::Keyboard::Left);
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			m_player.setDirectionFromKeyboard(sf::Keyboard::Right);
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			m_player.setDirectionFromKeyboard(sf::Keyboard::Up);
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			m_player.setDirectionFromKeyboard(sf::Keyboard::Down);
+	}
+	else
+	{
+		// If no movement keys are pressed, stop the player
+		m_player.setDirectionFromKeyboard(sf::Keyboard::Space); // Or whatever key you use to stop
+	}
 }
