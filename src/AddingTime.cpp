@@ -19,3 +19,8 @@ void AddingTime::playerCollide(Player& otherObject)
 	otherObject.setPresent(TIME);
 	this->setLife(true);
 }
+//-------------------------------------
+void AddingTime::explosionCollide(Explosion& otherobject)
+{
+	this->setLife(true);
+}

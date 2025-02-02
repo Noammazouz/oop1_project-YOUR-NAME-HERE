@@ -79,8 +79,7 @@ void GameController::runLevel()
 		}
 		if (m_player.getLife() == END_GAME || m_timer.asSeconds() <= 0.f)
 		{
-			// to do a Lost board
-			m_window.close();
+			lostWindow();
 			break;
 		}
 	}
@@ -234,19 +233,19 @@ void GameController::setExpoDirection(int index)
 		{
 		case UP:
 			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
-			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, -BOMB_WIDTH));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, -DEFUALT_WIDTH));
 			break;
 		case DOWN:
 			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
-			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, BOMB_WIDTH));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(0, DEFUALT_WIDTH));
 			break;
 		case LEFT:
 			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
-			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(-BOMB_WIDTH, 0));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(-DEFUALT_WIDTH, 0));
 			break;
 		case RIGHT:
 			m_movingObj.push_back(std::make_unique<Explosion>(sf::Vector2f(m_movingObj[index]->getPosition()), ResourcesManager::getInstance().getTexture("explosion")));
-			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(BOMB_WIDTH, 0));
+			m_movingObj[m_movingObj.size() - 1]->setDirection(sf::Vector2f(DEFUALT_WIDTH, 0));
 			break;
 		}
 	}
@@ -400,4 +399,20 @@ void GameController::addTime()
 {
 	m_timer += sf::seconds(ADDED_TIME);
 	m_scoreboard.updateTime(m_timer);
+}
+//------------------------
+void GameController::lostWindow()
+{
+	// to do a Lost board
+	ResourcesManager::getInstance().getMusic("game").stop();
+	m_sound.setBuffer(ResourcesManager::getInstance().getSound("loss"));
+	//m_sound.setVolume(100.f);
+	//m_sound.setLoop(true);
+	m_sound.play();
+	//m_window.close();
+	//m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
+	//m_menu.draw();
+	while (1)
+	{
+	}
 }

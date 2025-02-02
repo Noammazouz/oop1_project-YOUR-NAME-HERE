@@ -18,3 +18,8 @@ void RemovingGuard::playerCollide(Player& otherObject)
 	otherObject.setPresent(KILL);
 	this->setLife(true);
 }
+//-------------------------------------
+void RemovingGuard::explosionCollide(Explosion& otherobject)
+{
+	this->setLife(true);
+}

@@ -13,6 +13,7 @@ public:
 	const sf::Texture& getTexture(std::string name) const;
 	sf::Music& getMusic(std::string name);
 	const sf::Font& getFont() const;
+	sf::SoundBuffer& getSound(std::string name);
 	void show() const;
 
 private:
@@ -26,6 +27,6 @@ private:
 	sf::Music m_menuMusic;
 	sf::Music m_gameMusic;
 	sf::Font m_font;
-	//std::unordered_map<std::string, sf::Music> m_backgroundMusic;
+	std::unordered_map<std::string, sf::SoundBuffer> m_music;
 	std::unordered_map<std::string, sf::Texture> m_textures;
 };

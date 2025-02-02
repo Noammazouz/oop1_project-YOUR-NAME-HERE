@@ -18,3 +18,8 @@ void IncreasingLife::playerCollide(Player& otherObject)
 	otherObject.incLife();
 	this->setLife(true);
 }
+//-------------------------------------
+void IncreasingLife::explosionCollide(Explosion& otherobject)
+{
+	this->setLife(true);
+}

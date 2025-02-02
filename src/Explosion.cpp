@@ -2,7 +2,7 @@
 #include <iostream>
 
 Explosion::Explosion(sf::Vector2f position, const sf::Texture& texture)
-	: UpdateableObject(sf::Vector2f(position.x - BOMB_WIDTH / 2, position.y - BOMB_WIDTH / 2), texture, BOMB_WIDTH, BOMB_HEIGHT), m_explosion(texture), m_timeToLive(sf::seconds(0.5))
+	: UpdateableObject(sf::Vector2f(position.x - DEFUALT_WIDTH / 2, position.y - DEFUALT_WIDTH / 2), texture, DEFUALT_WIDTH, DEFUALT_HEIGHT), m_explosion(texture), m_timeToLive(sf::seconds(0.5))
 {
 }
 //-------------------------------------

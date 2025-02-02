@@ -92,5 +92,8 @@ void Player::setPresent(Present present)
 //-------------------------------------
 void Player::incLife()
 {
-	m_lives++;
+	if (m_lives < NUM_OF_LIVES)
+	{
+		m_lives++;
+	}
 }

@@ -73,16 +73,16 @@ void Board::LoadBoard(std::vector<std::unique_ptr<UpdateableObject>>& m_movingOb
 				m_movingObj.push_back(std::make_unique<Guard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("guard"), CELL_WIDTH, CELL_HEIGHT / 1.05f));
 				break;
 			case '+': // add time
-				m_staticObj.push_back(std::make_unique<AddingTime>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("add time"), CELL_WIDTH, CELL_HEIGHT));
+				m_staticObj.push_back(std::make_unique<AddingTime>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("add time"), DEFUALT_WIDTH, DEFUALT_HEIGHT));
 				break;
 			case '-': // remove guard
-				m_staticObj.push_back(std::make_unique<RemovingGuard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("kill guard"), CELL_WIDTH, CELL_HEIGHT));
+				m_staticObj.push_back(std::make_unique<RemovingGuard>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("kill guard"), DEFUALT_WIDTH, DEFUALT_HEIGHT));
 				break;
 			case '*': // freeze guard
-				m_staticObj.push_back(std::make_unique<FreezingGuards>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("freeze"), CELL_WIDTH, CELL_HEIGHT));
+				m_staticObj.push_back(std::make_unique<FreezingGuards>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("freeze"), DEFUALT_WIDTH, DEFUALT_HEIGHT));
 				break;
 			case '$': // add life
-				m_staticObj.push_back(std::make_unique<IncreasingLife>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("add life"), CELL_WIDTH, CELL_HEIGHT));
+				m_staticObj.push_back(std::make_unique<IncreasingLife>(sf::Vector2f(BOARD_STARTING_X + col * CELL_WIDTH, row * CELL_HEIGHT), resources.getTexture("add life"), DEFUALT_WIDTH, DEFUALT_HEIGHT));
 				break;
 			}
 		}

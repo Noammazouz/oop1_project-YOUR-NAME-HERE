@@ -87,6 +87,28 @@ void ResourcesManager::initializeMusic()
     m_gameMusic.setLoop(true);
     m_menuMusic.setVolume(50.f);
     m_gameMusic.setVolume(50.f);
+
+
+    std::vector<std::pair<std::string, std::string>> music =
+    {
+        //{"hit", "hit.ogg"},
+        {"loss", "loss.ogg"},
+        {"win", "win.ogg"}
+        //{"game over", "game over.png"},
+        //{"win", "win.png"}
+    };
+    for (const auto& [name, filePath] : music)
+    {
+        sf::SoundBuffer sound;
+        if (!sound.loadFromFile(filePath))
+        {
+            std::cout << "Failed to load texture " << filePath << std::endl;
+        }
+
+        // Insert the texture into the unordered_map
+        m_music[name] = sound;
+
+    }
 }
 //-------------------------------------
 sf::Music& ResourcesManager::getMusic(std::string name)
@@ -112,4 +134,14 @@ void ResourcesManager::initializeFont()
 const sf::Font& ResourcesManager::getFont() const
 {
 	return m_font;
+}
+//-------------------------------------
+sf::SoundBuffer& ResourcesManager::getSound(std::string name)
+{
+	auto it = m_music.find(name);
+	if (it == m_music.end())
+	{
+		std::cout << "Could not find sound: " << name << std::endl;
+	}
+	return it->second;
 }

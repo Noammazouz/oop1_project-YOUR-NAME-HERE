@@ -44,9 +44,11 @@ private:
 	void freezeGuard();
 	void removeGuard();
 	void addTime();
+	void lostWindow();
 
 	sf::RenderWindow m_window;
 	sf::Time m_timer;
+	sf::Sound m_sound;
 	Board m_board;
 	Player m_player;
 	Menu m_menu;

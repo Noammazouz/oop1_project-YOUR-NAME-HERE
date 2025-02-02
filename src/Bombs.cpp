@@ -3,7 +3,7 @@
 
 
 Bombs::Bombs(sf::Vector2f position, const sf::Texture& texture)
-    : UpdateableObject(position, texture, BOMB_WIDTH, BOMB_HEIGHT), m_timer(sf::seconds(BOMB_TIME))
+    : UpdateableObject(position, texture, DEFUALT_WIDTH, DEFUALT_HEIGHT), m_timer(sf::seconds(BOMB_TIME))
 {
 }
 //-------------------------------------
