@@ -76,7 +76,7 @@ void GameController::runLevel()
 		{
 			m_sound.setBuffer(ResourcesManager::getInstance().getSound("door"));
 			m_sound.setVolume(100.f);
-			m_sound.setPlayingOffset(sf::seconds(0.3f));
+			m_sound.setPlayingOffset(sf::seconds(0.5f));
 			m_sound.play();
 		    sf::sleep(sf::seconds(0.5f));
 			m_level++;
