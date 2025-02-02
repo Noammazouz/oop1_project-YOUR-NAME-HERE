@@ -412,12 +412,15 @@ void GameController::lostWindow()
 	ResourcesManager::getInstance().getMusic("game").stop();
 	m_sound.setBuffer(ResourcesManager::getInstance().getSound("loss"));
 	m_sound.setVolume(100.f);
-	//m_sound.setLoop(true);
 	m_sound.play();
-	//m_window.close();
-	//m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
-	//m_menu.draw();
-	//while (1);
+
+	sf::Sprite lostWindow;
+	lostWindow.setTexture(ResourcesManager::getInstance().getTexture("game over"));
+	m_window.clear();
+	m_window.draw(lostWindow);
+	m_window.display();
+	sf::sleep(sf::seconds(3));
+	m_window.close();
 }
 //------------------------
 void GameController::winWindow()
@@ -425,10 +428,14 @@ void GameController::winWindow()
 	// to do a win board
 	ResourcesManager::getInstance().getMusic("game").stop();
 	m_sound.setBuffer(ResourcesManager::getInstance().getSound("win"));
-	//m_sound.setVolume(100.f);
-	//m_sound.setLoop(true);
+	m_sound.setVolume(100.f);
 	m_sound.play();
-	//m_window.close();
-	//m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
-	//m_menu.draw();
+
+	sf::Sprite winWindow;
+	winWindow.setTexture(ResourcesManager::getInstance().getTexture("win"));
+	m_window.clear();
+	m_window.draw(winWindow);
+	m_window.display();
+	sf::sleep(sf::seconds(3));
+	m_window.close();
 }

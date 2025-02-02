@@ -44,9 +44,9 @@ void ResourcesManager::loadTexture()
 		{"explosion", "Explosion.png"},
 		{"add time", "add_time.png"},
 		{"add life", "m_medkit.png"},
-		{"kill guard", "o_water.png"}
-		//{"game over", "game over.png"},
-        //{"win", "win.png"}
+		{"kill guard", "o_water.png"},
+		{"game over", "lose_screen.png"},
+        {"win", "win_screen.png"}
     };
 
     for (const auto& [name, filePath] : textures) 
