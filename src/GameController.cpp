@@ -210,7 +210,7 @@ void GameController::calculateScore()
 	points += ENDING_LEVEL;
 	points += (Guard::getNumOfStartingGuards() * POINT_FOR_GUARD);
 	points += (std::abs(Guard::getNumOfGuardsAlive() - Guard::getNumOfStartingGuards()) * KILL_GUARD);
-	m_scoreboard.updateScore(points);
+	m_player.setScore(points);
 }
 //-------------------------------------
 void GameController::resetLevel()
@@ -352,6 +352,7 @@ void GameController::handleSocreboard()
 	m_scoreboard.updateTime(m_timer);
 	m_scoreboard.updateLevel(m_level);
 	m_scoreboard.updateLives(m_player.getLife());
+	m_scoreboard.updateScore(m_player.getScore());
 }
 void GameController::handlePresents()
 {
@@ -412,7 +413,4 @@ void GameController::lostWindow()
 	//m_window.close();
 	//m_window.create(sf::VideoMode(WIDTH, HEIGHT), "Bomberman");
 	//m_menu.draw();
-	while (1)
-	{
-	}
 }

@@ -19,6 +19,8 @@ public:
 
 	void setWin(bool win);
 	bool getWin() const;
+    int getScore();
+	void setScore(int score);
 	void decLife();
 	void incLife();
 	static int getLife();
@@ -29,6 +31,7 @@ public:
 private:
 	sf::Vector2f m_direction;
 	static int m_lives;
+	static int m_score;
 	bool m_win = false;
 	Present m_present;
 };

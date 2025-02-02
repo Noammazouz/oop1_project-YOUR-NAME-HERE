@@ -3,6 +3,9 @@
 
 
 int Player::m_lives = NUM_OF_LIVES;
+//---------------------------------
+int Player::m_score = 0;
+//---------------------------------
 Player::Player()
 {
 }
@@ -96,4 +99,14 @@ void Player::incLife()
 	{
 		m_lives++;
 	}
+}
+//-------------------------------------
+int Player::getScore()
+{
+	return m_score;
+}
+//----------------------------
+void Player::setScore(int score)
+{
+	m_score += score;
 }

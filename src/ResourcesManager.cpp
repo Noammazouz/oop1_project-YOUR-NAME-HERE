@@ -94,8 +94,6 @@ void ResourcesManager::initializeMusic()
         //{"hit", "hit.ogg"},
         {"loss", "loss.ogg"},
         {"win", "win.ogg"}
-        //{"game over", "game over.png"},
-        //{"win", "win.png"}
     };
     for (const auto& [name, filePath] : music)
     {

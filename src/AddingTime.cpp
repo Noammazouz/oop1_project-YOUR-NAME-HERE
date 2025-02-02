@@ -15,7 +15,6 @@ void AddingTime::guardCollide(Guard& /*otherObject*/)
 //------------------------------------------
 void AddingTime::playerCollide(Player& otherObject)
 {
-	std::cout << "in adding time" << std::endl;
 	otherObject.setPresent(TIME);
 	this->setLife(true);
 }
