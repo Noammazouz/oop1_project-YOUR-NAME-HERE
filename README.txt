@@ -1,4 +1,4 @@
-#Bomberman Game - Noam Mazouz & Ofek Choen
+#Bomberman Game - Noam Mazouz & Ofek Cohen
 
 Bomberman Game is a simple maze game where the player controls a bomberman trying to navigate through a maze while avoiding guard and trying to reach the door.
 The game is implemented using C++ and SFML (Simple and Fast Multimedia Library) for graphics rendering.
@@ -90,7 +90,7 @@ D - door.
 
 ## Credits
 
-- Game developed by Noam Mazouz & Ofek Choen.
+- Game developed by Noam Mazouz & Ofek Cohen.
 - Sound effects and music obtained from Youtube, Pixabay.
 - Special thanks to our lecturers Michal Merkin & Yehezkel Bernat for their assistance and feedback.
 - Inspired by Bomberman games.
@@ -98,4 +98,4 @@ D - door.
 ## License
 
 This project is licensed under the Hadassah Academic College students:
-Noam Mazouz & Ofek Choen.
+Noam Mazouz & Ofek Cohen.

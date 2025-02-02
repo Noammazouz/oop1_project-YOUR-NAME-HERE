@@ -103,7 +103,7 @@ void ResourcesManager::initializeMusic()
             std::cout << "Failed to load texture " << filePath << std::endl;
         }
 
-        // Insert the texture into the unordered_map
+        // Insert the soundBuffer into the unordered_map
         m_music[name] = sound;
 
     }
