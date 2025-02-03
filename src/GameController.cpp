@@ -161,6 +161,9 @@ void GameController::handleCollision()
 	{
 		if (m_player.checkCollision(*m_movingObj[guard]))
 		{
+			m_sound.setBuffer(ResourcesManager::getInstance().getSound("hit"));
+			m_sound.setVolume(100.f);
+			m_sound.play();
 			m_player.collide(*m_movingObj[guard]);
 			resetLevel();
 			break;
@@ -279,6 +282,9 @@ void GameController::checkExpo()
 		}
 		if (m_movingObj[explosion]->checkCollision(m_player))
 		{
+			m_sound.setBuffer(ResourcesManager::getInstance().getSound("hit"));
+			m_sound.setVolume(100.f);
+			m_sound.play();
 			m_movingObj[explosion]->collide(m_player);
 			resetLevel();
 			break;
@@ -448,10 +454,7 @@ void GameController::winWindow()
 void GameController::hadndlePlayerDirection()
 {
 	// Handle continuous movement - add this before event handling
-	if (checkDeriction())/*sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Down))*/
+	if (checkDeriction())
 	{
 		// Get the current key being pressed and update movement
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
