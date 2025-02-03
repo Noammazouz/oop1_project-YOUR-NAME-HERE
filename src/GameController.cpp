@@ -204,6 +204,9 @@ void GameController::explosion()
 	{
 		if (m_movingObj[bomb]->getExpo())
 		{
+			m_sound.setBuffer(ResourcesManager::getInstance().getSound("explosion"));
+			m_sound.setVolume(100.f);
+			m_sound.play();
 			setExpoDirection(bomb);
 			checkVaildDraw();
 			drawWindow();
