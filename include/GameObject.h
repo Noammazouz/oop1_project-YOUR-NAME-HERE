@@ -23,9 +23,9 @@ public:
 	virtual sf::Vector2f getPosition() const;
 	virtual void collide(GameObject& otherObject) = 0;
 	virtual void playerCollide(Player& otherObject);
-	//virtual ReturnType doorCollide(Door& otherObject) {};
 	virtual void guardCollide(Guard& otherObject) = 0;
 	virtual void explosionCollide(Explosion& otherobject);
+
 	void setPosition(const sf::Vector2f& position);
 	bool isDead() const;
 	void setLife(const bool life);
@@ -33,8 +33,10 @@ public:
 protected:
 	void updatePosition(sf::Vector2f direction);
 	void mirrorImage(sf::Vector2f direction);
+
 private:
 	void setSprite(sf::Vector2f pos);
+
 	sf::Sprite m_pic;
 	float m_cell_size[2];
 	bool m_is_dead = false;

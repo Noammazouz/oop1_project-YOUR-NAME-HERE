@@ -12,12 +12,12 @@ public:
 	virtual void guardCollide(Guard& otherObject) override;
 	virtual void explosionCollide(Explosion& otherobject) override;
 	virtual void playerCollide(Player& otherObject) override;
+	virtual void setFreezing(bool freeze) override;
 
 	static void resetNumOfGuards();
 	static int getNumOfStartingGuards();
 	static int getNumOfGuardsAlive();
 
-	virtual void setFreezing(bool freeze) override;
 	~Guard();
 private:
 	void checktimer();
@@ -25,6 +25,7 @@ private:
 	static int m_num_of_guards;
 	static int m_num_of_guards_alive;
 	bool m_freeze = false;
+
 	sf::Vector2f m_direction;
 	sf::Vector2f m_prevlocation;
 	sf::Time m_freezeTime;

@@ -9,6 +9,7 @@ AddingTime::AddingTime(sf::Vector2f position, const sf::Texture& texture, float 
 void AddingTime::collide(GameObject& /*otherObject*/)
 {
 }
+//--------------------------------
 void AddingTime::guardCollide(Guard& /*otherObject*/)
 {
 }

@@ -6,7 +6,7 @@ Scoreboard::Scoreboard()
 {
 
 }
-
+//---------------------------------------
 void Scoreboard::updateLives(int numberOfLives)
 {
 	m_numberOfLives.setString("Life: " + std::to_string(numberOfLives));
@@ -16,12 +16,12 @@ void Scoreboard::updateLives(int numberOfLives)
 	m_numberOfLives.setOutlineThickness(1);
 	m_numberOfLives.setPosition(sf::Vector2f(0, 420));
 }
-
+//---------------------------------------
 sf::Text Scoreboard::getLives() const
 {
 	return m_numberOfLives;
 }
-
+//---------------------------------------
 void Scoreboard::updateScore(int Score)
 {
 	m_Score.setString("Points: " + std::to_string(Score));
@@ -31,12 +31,12 @@ void Scoreboard::updateScore(int Score)
 	m_Score.setOutlineThickness(1);
 	m_Score.setPosition(sf::Vector2f(0, 227));
 }
-
+//---------------------------------------
 sf::Text Scoreboard::getScore() const
 {
 	return m_Score;
 }
-
+//---------------------------------------
 void Scoreboard::updateLevel(int numberOfLevel)
 {
 	m_Level.setString("Level: " + std::to_string(numberOfLevel));
@@ -46,12 +46,12 @@ void Scoreboard::updateLevel(int numberOfLevel)
 	m_Level.setOutlineThickness(1);
 	m_Level.setPosition(sf::Vector2f(0, 125));
 }
-
+//---------------------------------------
 sf::Text Scoreboard::getLevel() const
 {
 	return m_Level;
 }
-
+//---------------------------------------
 void Scoreboard::updateTime(sf::Time Timer)
 {
 	int minutes = Timer.asSeconds() / 60,
@@ -66,7 +66,7 @@ void Scoreboard::updateTime(sf::Time Timer)
 	m_Time.setOutlineThickness(1);
 	m_Time.setPosition(sf::Vector2f(0, 320));
 }
-
+//---------------------------------------
 sf::Text Scoreboard::getTime() const
 {
 	return m_Time;

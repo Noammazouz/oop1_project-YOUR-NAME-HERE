@@ -13,14 +13,14 @@ public:
 	virtual void setFreezing(bool freeze);
 	virtual void update(sf::Time deltaTime) = 0;
 	virtual void setDirection(sf::Vector2f position) = 0;
-
 	virtual bool checkCollision(GameObject& otherObject);
-	sf::Vector2f getPrevLocation() const;
-
 	virtual sf::Time getTimer() const;
 	virtual bool getExpo() const;
 
+	sf::Vector2f getPrevLocation() const;
+
 	virtual ~UpdateableObject() = default;
+
 protected:
 	void setPrevLocation(sf::Vector2f position);
 

@@ -8,6 +8,7 @@ FreezingGuards::FreezingGuards(sf::Vector2f position, const sf::Texture& texture
 void FreezingGuards::collide(GameObject& /*otherObject*/)
 {
 }
+//------------------------------------------
 void FreezingGuards::guardCollide(Guard& /*otherObject*/)
 {
 }
