@@ -16,30 +16,6 @@ Player::Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WID
 {
 }
 //-------------------------------------
-void Player::setDirectionFromKeyboard(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case sf::Keyboard::Key::Space:
-		 m_direction = sf::Vector2f(0, 0); 
-		 break;
-    case sf::Keyboard::Key::Left:
-		 m_direction = sf::Vector2f(-1, 0);
-		 this->mirrorImage(m_direction);
-		 break;
-    case sf::Keyboard::Key::Down:
-		 m_direction = sf::Vector2f(0, 1); 
-		 break;
-	case sf::Keyboard::Key::Right:
-		m_direction = sf::Vector2f(1, 0);
-		this->mirrorImage(m_direction);
-		break;
-	case sf::Keyboard::Key::Up:
-		m_direction = sf::Vector2f(0, -1);
-		break;
-	}
-}
-//-------------------------------------
 void Player::update(sf::Time deltaTime)
 {
 	this->setPrevLocation(this->getPosition());
@@ -47,7 +23,35 @@ void Player::update(sf::Time deltaTime)
 }
 //-------------------------------------
 void Player::setDirection(sf::Vector2f /*position*/)
-{}
+{
+	if (checkDeriction())
+	{
+		// Get the current key being pressed and update movement
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			m_direction = sf::Vector2f(-1, 0);
+			this->mirrorImage(m_direction);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			m_direction = sf::Vector2f(1, 0);
+			this->mirrorImage(m_direction);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			m_direction = sf::Vector2f(0, -1);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			m_direction = sf::Vector2f(0, 1);
+		}
+	}
+	else
+	{
+		// If no movement keys are pressed, stop the player
+		m_direction = sf::Vector2f(0, 0);
+	}
+}
 //-------------------------------------
 void Player::collide(GameObject& otherObject)
 {
@@ -110,4 +114,12 @@ int Player::getScore()
 void Player::setScore(int score)
 {
 	m_score += score;
+}
+//-------------------------------------
+bool Player::checkDeriction()
+{
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 }

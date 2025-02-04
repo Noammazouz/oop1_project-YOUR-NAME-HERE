@@ -9,9 +9,8 @@ public:
 	Player();
 	Player(sf::Vector2f position, const sf::Texture& texture, float CELL_WIDTH, float CELL_HEIGHT);
 
-	void update(sf::Time deltaTime) override;
-	void setDirectionFromKeyboard(sf::Keyboard::Key key);
-	void setDirection(sf::Vector2f position) override;
+	virtual void update(sf::Time deltaTime) override;
+	virtual void setDirection(sf::Vector2f position) override;
 
 	virtual void collide(GameObject& otherObject) override;
 	virtual void guardCollide(Guard& otherObject) override;
@@ -26,9 +25,11 @@ public:
 	static int getLife();
 	const Present& getPresent() const;
 	void setPresent(Present present);
+
 	~Player() = default;
 
 private:
+	bool checkDeriction();
 	sf::Vector2f m_direction;
 	static int m_lives;
 	static int m_score;

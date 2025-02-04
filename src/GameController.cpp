@@ -29,7 +29,7 @@ void GameController::runLevel()
 		drawWindow();
 		m_window.display();
 
-		hadndlePlayerDirection();
+		m_player.setDirection(sf::Vector2f());
 
 		for (auto event = sf::Event{}; m_window.pollEvent(event);)
 		{
@@ -41,18 +41,8 @@ void GameController::runLevel()
 				case sf::Event::KeyPressed:
 				{
 					handleKeyPressed(event.key);
-					
-					/*else
-					{
-						m_player.setDirectionFromKeyboard(event.key.code);
-					}*/
 					break;
 				}
-				/*case sf::Event::KeyReleased:
-				{
-					m_player.setDirectionFromKeyboard(sf::Keyboard::Key::Space);
-					break;
-				}*/
 			}
 		}
 		
@@ -452,28 +442,6 @@ void GameController::winWindow()
 	sf::sleep(sf::seconds(3));
 	m_window.close();
 }
-//-------------------------------
-void GameController::hadndlePlayerDirection()
-{
-	// Handle continuous movement - add this before event handling
-	if (checkDeriction())
-	{
-		// Get the current key being pressed and update movement
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			m_player.setDirectionFromKeyboard(sf::Keyboard::Left);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			m_player.setDirectionFromKeyboard(sf::Keyboard::Right);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			m_player.setDirectionFromKeyboard(sf::Keyboard::Up);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			m_player.setDirectionFromKeyboard(sf::Keyboard::Down);
-	}
-	else
-	{
-		// If no movement keys are pressed, stop the player
-		m_player.setDirectionFromKeyboard(sf::Keyboard::Space); // Or whatever key you use to stop
-	}
-}
 //---------------------------------
 void GameController::handleKeyPressed(sf::Event::KeyEvent event)
 {
@@ -490,12 +458,4 @@ void GameController::handleKeyPressed(sf::Event::KeyEvent event)
 	{
 		handleMuting();
 	}
-}
-//---------------------------------
-bool GameController::checkDeriction()
-{
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 }
