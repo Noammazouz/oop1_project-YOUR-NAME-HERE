@@ -24,7 +24,6 @@ int Board::loadLevel(const int& currStage)
 
 	if (!file)
 	{
-		//std::cout << "You are the best! You beat me!" << std::endl;
 		return END_GAME;
 	}
 
